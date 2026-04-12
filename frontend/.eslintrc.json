@@ -1,0 +1,8 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "ignorePatterns": [".eslintrc.json", "*.svg", "*.json"],
+  "rules": {
+    "no-unused-vars": "error",
+    "max-lines": ["error", 150]
+  }
+}
