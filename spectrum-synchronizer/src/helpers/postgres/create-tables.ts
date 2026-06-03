@@ -1,20 +1,14 @@
-import createConflictsTable from "../../conflicts/queries/createTable.queries";
-import { createTableFunction } from "../../global/functions/create-table.function";
-import { SCHEMAS } from "../../models/schemas.models";
-import { handleError } from "../../utils/handleError";
-
-const createExtentionsUuidQuery = `CREATE EXTENSION IF NOT EXISTS "uuid-ossp" SCHEMA public VERSION "1.1"`;
-
-const createSchemaSpectrumQuery = `CREATE SCHEMA IF NOT EXISTS ${SCHEMAS.SPECTRUM}`;
+import queryToPostgres from './query-to-postgres';
+import { ConflictsSchema } from '../../conflicts/queries/createTable.queries';
+import { handleError } from '../../utils/handleError';
 
 export const createTables = async () => {
   try {
-    await createTableFunction("extentions_uuid", createExtentionsUuidQuery);
-    await createTableFunction("schema_spectrum", createSchemaSpectrumQuery);
-    await createConflictsTable();
+    await queryToPostgres(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp" SCHEMA public VERSION "1.1"`);
+    await ConflictsSchema.sync();
   } catch (error) {
-    handleError(error, "Failed to create tables", "CREATE TABLES");
+    handleError(error, 'Failed to create tables', 'CREATE TABLES');
   } finally {
-    global.log.info({ tag: "CREATE TABLES" }, "End created tables");
+    global.log.info({ tag: 'CREATE TABLES' }, 'End created tables');
   }
 };
