@@ -1,20 +1,8 @@
-import type { SqlValue } from '../types/orm.types';
-
-interface ColumnConfig {
-  readonly sqlType: string;
-  readonly notNull: boolean;
-  readonly primaryKey: boolean;
-  readonly unique: boolean;
-  readonly defaultValue?: string;
-}
+import type { ColumnConfig, SqlValue } from "../types/orm.types";
 
 export class Column<T extends SqlValue> {
-  // Phantom type — exists only for TypeScript inference, never at runtime
-  declare readonly _tsType: T;
-
   private readonly _config: ColumnConfig;
-
-  constructor(sqlType: string, config?: Partial<Omit<ColumnConfig, 'sqlType'>>) {
+  constructor(sqlType: string, config?: Partial<Omit<ColumnConfig, "sqlType">>) {
     this._config = {
       sqlType,
       notNull: false,
@@ -40,30 +28,21 @@ export class Column<T extends SqlValue> {
   }
 
   unique(): Column<T> {
-    return new Column<T>(this._config.sqlType, { ...this._config, unique: true });
+    return new Column<T>(this._config.sqlType, { ...this._config, unique: true});
   }
 
   default(value: string): Column<T> {
-    return new Column<T>(this._config.sqlType, {
-      ...this._config,
-      defaultValue: value,
-    });
+    return new Column<T>(this._config.sqlType, { ...this._config, defaultValue: value});
   }
 
-  toSQL(name: string): string {
+  toSQL(name: string) {
     const parts: string[] = [`"${name}"`, this._config.sqlType];
 
-    if (this._config.defaultValue !== undefined) {
-      parts.push(`DEFAULT ${this._config.defaultValue}`);
-    }
+    if (this._config.defaultValue) parts.push(`DEFAULT ${this._config.defaultValue}`);
+    if (this._config.primaryKey) parts.push("PRIMARY KEY");
+    if (this._config.notNull && !this._config.primaryKey) parts.push("NOT NULL");
+    if (this._config.unique && !this._config.primaryKey) parts.push("UNIQUE");
 
-    if (this._config.primaryKey) {
-      parts.push('PRIMARY KEY');
-    } else {
-      if (this._config.notNull) parts.push('NOT NULL');
-      if (this._config.unique) parts.push('UNIQUE');
-    }
-
-    return parts.join(' ');
+    return parts.join(" ");
   }
 }

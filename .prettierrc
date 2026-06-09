@@ -1,0 +1,18 @@
+{
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "tabWidth": 2,
+    "printWidth": 120,
+    "semi": true,
+    "trailingComma": "es5",
+    "embeddedLanguageFormatting": "auto",
+    "endOfLine": "crlf",
+    "overrides": [
+        {
+            "files":"*.svg",
+            "options": {
+                "parser":"html"
+            }
+        }
+    ]
+}
