@@ -1,5 +1,6 @@
 import queryToPostgres from '../../helpers/postgres/query-to-postgres';
 import type { ColumnRecord } from '../types/orm.types';
+import type { FindOptions, InferRow } from '../types/query.types';
 import { ColumnTypeSelector } from './ColumnTypeSelector';
 
 export class Schema<TName extends string, TCols extends ColumnRecord> {
@@ -36,6 +37,24 @@ export class Schema<TName extends string, TCols extends ColumnRecord> {
       .join(',\n');
 
     return `CREATE TABLE IF NOT EXISTS ${this.schemaName}.${this.tableName} (\n${colDefs}\n)`;
+  }
+
+  async findAll(): Promise<InferRow<TCols>[]> {
+    return this._select<InferRow<TCols>>('*');
+  }
+
+  async find<TKeys extends keyof TCols & string>(
+    options: FindOptions<TCols, TKeys>,
+  ): Promise<Pick<InferRow<TCols>, TKeys>[]> {
+    const cols = options.select.map(c => `"${c}"`).join(', ');
+    return this._select<Pick<InferRow<TCols>, TKeys>>(cols);
+  }
+
+  private async _select<TRow>(cols: string): Promise<TRow[]> {
+    const result = await queryToPostgres<TRow>(
+      `SELECT ${cols} FROM ${this.schemaName}.${this.tableName}`,
+    );
+    return result ?? [];
   }
 
   async sync(): Promise<void> {
