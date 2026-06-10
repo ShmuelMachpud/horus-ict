@@ -1,4 +1,4 @@
-import type { Column } from '../core/Column';
+import type { ColumnDefinition } from '../core/ColumnDefinition';
 
 export type SqlValue = string | number | boolean | null;
 
@@ -10,5 +10,5 @@ export interface ColumnConfig {
   readonly defaultValue?: string;
 }
 
-export type ColumnRecord = Record<string, Column<SqlValue>>;
+export type ColumnRecord = Record<string, ColumnDefinition<SqlValue>>;
 

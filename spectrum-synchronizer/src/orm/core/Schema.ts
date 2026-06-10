@@ -1,7 +1,6 @@
 import queryToPostgres from '../../helpers/postgres/query-to-postgres';
 import type { ColumnRecord } from '../types/orm.types';
 import type { FindOptions, InferRow } from '../types/query.types';
-import { ColumnTypeSelector } from './ColumnTypeSelector';
 
 export class Schema<TName extends string, TCols extends ColumnRecord> {
   readonly columns: TCols;
@@ -9,18 +8,18 @@ export class Schema<TName extends string, TCols extends ColumnRecord> {
   private readonly _tableName: TName;
   private readonly _schemaName: string;
 
-  protected constructor(tableName: TName, schemaName: string, columns: TCols) {
+  private constructor(tableName: TName, schemaName: string, columns: TCols) {
     this._tableName = tableName;
     this._schemaName = schemaName;
     this.columns = columns;
   }
 
-  static create<TName extends string>(tableName: TName, schemaName = 'public') {
-    return new Schema(tableName, schemaName, {});
-  }
-
-  column<TColName extends string>(name: TColName): ColumnTypeSelector<TName, TCols, TColName> {
-    return new ColumnTypeSelector(this, name);
+  static create<TName extends string, TCols extends ColumnRecord>(
+    tableName: TName,
+    schemaName: string,
+    columns: TCols
+  ): Schema<TName, TCols> {
+    return new Schema(tableName, schemaName, columns);
   }
 
   get tableName(): TName {
@@ -44,16 +43,14 @@ export class Schema<TName extends string, TCols extends ColumnRecord> {
   }
 
   async find<TKeys extends keyof TCols & string>(
-    options: FindOptions<TCols, TKeys>,
+    options: FindOptions<TCols, TKeys>
   ): Promise<Pick<InferRow<TCols>, TKeys>[]> {
-    const cols = options.select.map(c => `"${c}"`).join(', ');
+    const cols = options.select.map((c) => `"${c}"`).join(', ');
     return this._select<Pick<InferRow<TCols>, TKeys>>(cols);
   }
 
   private async _select<TRow>(cols: string): Promise<TRow[]> {
-    const result = await queryToPostgres<TRow>(
-      `SELECT ${cols} FROM ${this.schemaName}.${this.tableName}`,
-    );
+    const result = await queryToPostgres<TRow>(`SELECT ${cols} FROM ${this.schemaName}.${this.tableName}`);
     return result ?? [];
   }
 

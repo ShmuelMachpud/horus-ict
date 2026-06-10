@@ -1,6 +1,6 @@
 import type { ColumnConfig, SqlValue } from "../types/orm.types";
 
-export class Column<T extends SqlValue> {
+export class ColumnDefinition<T extends SqlValue> {
   private readonly _config: ColumnConfig;
   constructor(sqlType: string, config?: Partial<Omit<ColumnConfig, "sqlType">>) {
     this._config = {
@@ -12,27 +12,27 @@ export class Column<T extends SqlValue> {
     };
   }
 
-  notNull(): Column<NonNullable<T>> {
-    return new Column<NonNullable<T>>(this._config.sqlType, {
+  notNull(): ColumnDefinition<NonNullable<T>> {
+    return new ColumnDefinition<NonNullable<T>>(this._config.sqlType, {
       ...this._config,
       notNull: true,
     });
   }
 
-  primaryKey(): Column<NonNullable<T>> {
-    return new Column<NonNullable<T>>(this._config.sqlType, {
+  primaryKey(): ColumnDefinition<NonNullable<T>> {
+    return new ColumnDefinition<NonNullable<T>>(this._config.sqlType, {
       ...this._config,
       primaryKey: true,
       notNull: true,
     });
   }
 
-  unique(): Column<T> {
-    return new Column<T>(this._config.sqlType, { ...this._config, unique: true});
+  unique(): ColumnDefinition<T> {
+    return new ColumnDefinition<T>(this._config.sqlType, { ...this._config, unique: true});
   }
 
-  default(value: string): Column<T> {
-    return new Column<T>(this._config.sqlType, { ...this._config, defaultValue: value});
+  default(value: string): ColumnDefinition<T> {
+    return new ColumnDefinition<T>(this._config.sqlType, { ...this._config, defaultValue: value});
   }
 
   toSQL(name: string) {
