@@ -3,9 +3,9 @@ import type { ColumnRecord, ColumnRef, ColumnRefs } from '../types/orm.types';
 import type { FindOptions, InferRow } from '../types/query.types';
 
 export class Schema<TName extends string, TCols extends ColumnRecord> {
-  #columns: TCols;
-  #tableName: TName;
-  #schemaName: string;
+  readonly #columns: TCols;
+  readonly #tableName: TName;
+  readonly #schemaName: string;
 
   private constructor(tableName: TName, schemaName: string, columns: TCols) {
     this.#tableName = tableName;
@@ -27,41 +27,33 @@ export class Schema<TName extends string, TCols extends ColumnRecord> {
     return schema as Schema<TName, TCols> & ColumnRefs<TCols>;
   }
 
-  get tableName(): TName {
-    return this.#tableName;
-  }
-
-  get schemaName(): string {
-    return this.#schemaName;
-  }
-
-  toSQL(): string {
+  #toSQL(): string {
     const colDefs = Object.entries(this.#columns)
       .map(([name, col]) => `    ${col.toSQL(name)}`)
       .join(',\n');
 
-    return `CREATE TABLE IF NOT EXISTS ${this.schemaName}.${this.tableName} (\n${colDefs}\n)`;
+    return `CREATE TABLE IF NOT EXISTS ${this.#schemaName}.${this.#tableName} (\n${colDefs}\n)`;
   }
 
   async findAll(): Promise<InferRow<TCols>[]> {
-    return this._select<InferRow<TCols>>('*');
+    return this.#select<InferRow<TCols>>('*');
   }
 
   async find<TKeys extends keyof TCols & string>(
     options: FindOptions<TCols, TKeys>
   ): Promise<Pick<InferRow<TCols>, TKeys>[]> {
     const cols = options.select.map((c) => `"${c}"`).join(', ');
-    return this._select<Pick<InferRow<TCols>, TKeys>>(cols);
+    return this.#select<Pick<InferRow<TCols>, TKeys>>(cols);
   }
 
-  private async _select<TRow>(cols: string): Promise<TRow[]> {
-    const result = await queryToPostgres<TRow>(`SELECT ${cols} FROM ${this.schemaName}.${this.tableName}`);
+  async #select<TRow>(cols: string): Promise<TRow[]> {
+    const result = await queryToPostgres<TRow>(`SELECT ${cols} FROM ${this.#schemaName}.${this.#tableName}`);
     return result ?? [];
   }
 
   async sync(): Promise<void> {
     await queryToPostgres(`CREATE SCHEMA IF NOT EXISTS ${this.#schemaName}`);
-    await queryToPostgres(this.toSQL());
-    global.log.success({ tag: 'ORM' }, `Synced table "${this.schemaName}.${this.tableName}"`);
+    await queryToPostgres(this.#toSQL());
+    global.log.success({ tag: 'ORM' }, `Synced table "${this.#schemaName}.${this.#tableName}"`);
   }
 }
