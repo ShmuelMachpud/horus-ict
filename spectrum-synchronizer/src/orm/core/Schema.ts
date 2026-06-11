@@ -1,37 +1,42 @@
 import queryToPostgres from '../../helpers/postgres/query-to-postgres';
-import type { ColumnRecord } from '../types/orm.types';
+import type { ColumnRecord, ColumnRef, ColumnRefs } from '../types/orm.types';
 import type { FindOptions, InferRow } from '../types/query.types';
 
 export class Schema<TName extends string, TCols extends ColumnRecord> {
-  readonly columns: TCols;
-
-  private readonly _tableName: TName;
-  private readonly _schemaName: string;
+  #columns: TCols;
+  #tableName: TName;
+  #schemaName: string;
 
   private constructor(tableName: TName, schemaName: string, columns: TCols) {
-    this._tableName = tableName;
-    this._schemaName = schemaName;
-    this.columns = columns;
+    this.#tableName = tableName;
+    this.#schemaName = schemaName;
+    this.#columns = columns;
   }
 
   static create<TName extends string, TCols extends ColumnRecord>(
     tableName: TName,
     schemaName: string,
     columns: TCols
-  ): Schema<TName, TCols> {
-    return new Schema(tableName, schemaName, columns);
+  ): Schema<TName, TCols> & ColumnRefs<TCols> {
+    const schema = new Schema(tableName, schemaName, columns);
+    const table = `${schemaName}.${tableName}`;
+    for (const column of Object.keys(columns)) {
+      const ref: ColumnRef = { table, column };
+      Object.defineProperty(schema, column, { value: ref, enumerable: false });
+    }
+    return schema as Schema<TName, TCols> & ColumnRefs<TCols>;
   }
 
   get tableName(): TName {
-    return this._tableName;
+    return this.#tableName;
   }
 
   get schemaName(): string {
-    return this._schemaName;
+    return this.#schemaName;
   }
 
   toSQL(): string {
-    const colDefs = Object.entries(this.columns)
+    const colDefs = Object.entries(this.#columns)
       .map(([name, col]) => `    ${col.toSQL(name)}`)
       .join(',\n');
 
@@ -55,7 +60,7 @@ export class Schema<TName extends string, TCols extends ColumnRecord> {
   }
 
   async sync(): Promise<void> {
-    await queryToPostgres(`CREATE SCHEMA IF NOT EXISTS ${this._schemaName}`);
+    await queryToPostgres(`CREATE SCHEMA IF NOT EXISTS ${this.#schemaName}`);
     await queryToPostgres(this.toSQL());
     global.log.success({ tag: 'ORM' }, `Synced table "${this.schemaName}.${this.tableName}"`);
   }

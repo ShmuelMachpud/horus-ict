@@ -1,4 +1,4 @@
-import type { ColumnConfig, SqlValue } from "../types/orm.types";
+import type { ColumnConfig, ColumnRef, SqlValue } from "../types/orm.types";
 
 export class ColumnDefinition<T extends SqlValue> {
   private readonly _config: ColumnConfig;
@@ -35,6 +35,14 @@ export class ColumnDefinition<T extends SqlValue> {
     return new ColumnDefinition<T>(this._config.sqlType, { ...this._config, defaultValue: value});
   }
 
+  /** Adds a foreign key. The target column must hold a compatible type. */
+  reference(ref: ColumnRef<T>): ColumnDefinition<T> {
+    return new ColumnDefinition<T>(this._config.sqlType, {
+      ...this._config,
+      reference: { table: ref.table, column: ref.column },
+    });
+  }
+
   toSQL(name: string) {
     const parts: string[] = [`"${name}"`, this._config.sqlType];
 
@@ -42,6 +50,10 @@ export class ColumnDefinition<T extends SqlValue> {
     if (this._config.primaryKey) parts.push("PRIMARY KEY");
     if (this._config.notNull && !this._config.primaryKey) parts.push("NOT NULL");
     if (this._config.unique && !this._config.primaryKey) parts.push("UNIQUE");
+    if (this._config.reference) {
+      const { table, column } = this._config.reference;
+      parts.push(`REFERENCES ${table}("${column}")`);
+    }
 
     return parts.join(" ");
   }
