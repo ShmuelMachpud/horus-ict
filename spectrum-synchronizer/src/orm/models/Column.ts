@@ -1,6 +1,6 @@
 import type { ColumnConfig, ColumnRef, SqlValue } from '../types/orm.types';
 
-export class ColumnDefinition<T extends SqlValue> {
+export class Column<T extends SqlValue> {
   readonly #config: ColumnConfig;
 
   constructor(sqlType: string, config?: Partial<Omit<ColumnConfig, 'sqlType'>>) {
@@ -13,32 +13,48 @@ export class ColumnDefinition<T extends SqlValue> {
     };
   }
 
-  notNull(): ColumnDefinition<NonNullable<T>> {
-    return new ColumnDefinition<NonNullable<T>>(this.#config.sqlType, {
+  static uuid() {
+    return new Column<string | null>('UUID');
+  }
+  static varchar(length: number) {
+    return new Column<string | null>(`VARCHAR(${length})`);
+  }
+  static integer() {
+    return new Column<number | null>('INTEGER');
+  }
+  static bigint() {
+    return new Column<number | null>('BIGINT');
+  }
+  static boolean() {
+    return new Column<boolean | null>('BOOLEAN');
+  }
+
+  notNull(): Column<NonNullable<T>> {
+    return new Column<NonNullable<T>>(this.#config.sqlType, {
       ...this.#config,
       notNull: true,
     });
   }
 
-  primaryKey(): ColumnDefinition<NonNullable<T>> {
-    return new ColumnDefinition<NonNullable<T>>(this.#config.sqlType, {
+  primaryKey(): Column<NonNullable<T>> {
+    return new Column<NonNullable<T>>(this.#config.sqlType, {
       ...this.#config,
       primaryKey: true,
       notNull: true,
     });
   }
 
-  unique(): ColumnDefinition<T> {
-    return new ColumnDefinition<T>(this.#config.sqlType, { ...this.#config, unique: true });
+  unique(): Column<T> {
+    return new Column<T>(this.#config.sqlType, { ...this.#config, unique: true });
   }
 
-  default(value: string): ColumnDefinition<T> {
-    return new ColumnDefinition<T>(this.#config.sqlType, { ...this.#config, defaultValue: value });
+  default(value: string): Column<T> {
+    return new Column<T>(this.#config.sqlType, { ...this.#config, defaultValue: value });
   }
 
   /** Adds a foreign key. The target column must hold a compatible type. */
-  reference(ref: ColumnRef<T>): ColumnDefinition<T> {
-    return new ColumnDefinition<T>(this.#config.sqlType, {
+  reference(ref: ColumnRef<T>): Column<T> {
+    return new Column<T>(this.#config.sqlType, {
       ...this.#config,
       reference: { table: ref.table, column: ref.column },
     });
@@ -59,4 +75,3 @@ export class ColumnDefinition<T extends SqlValue> {
     return parts.join(' ');
   }
 }
-
