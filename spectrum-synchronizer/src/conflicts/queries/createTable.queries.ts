@@ -2,7 +2,7 @@ import { SCHEMAS } from '../../models/schemas.models';
 import { TABLES_SPECTRUM } from '../../models/tables.models';
 import { ORM } from '../../orm/models/ORM';
 
-const UnitsSchema = ORM.createTable('units', SCHEMAS.SPECTRUM, {
+export const UnitsSchema = ORM.createTable('units', SCHEMAS.SPECTRUM, {
   id: ORM.uuid().default('uuid_generate_v4()').primaryKey(),
   name: ORM.varchar(255).notNull(),
 });
