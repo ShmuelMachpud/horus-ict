@@ -13,22 +13,6 @@ export class Column<T extends SqlValue> {
     };
   }
 
-  static uuid() {
-    return new Column<string | null>('UUID');
-  }
-  static varchar(length: number) {
-    return new Column<string | null>(`VARCHAR(${length})`);
-  }
-  static integer() {
-    return new Column<number | null>('INTEGER');
-  }
-  static bigint() {
-    return new Column<number | null>('BIGINT');
-  }
-  static boolean() {
-    return new Column<boolean | null>('BOOLEAN');
-  }
-
   notNull(): Column<NonNullable<T>> {
     return new Column<NonNullable<T>>(this.#config.sqlType, {
       ...this.#config,
@@ -52,7 +36,6 @@ export class Column<T extends SqlValue> {
     return new Column<T>(this.#config.sqlType, { ...this.#config, defaultValue: value });
   }
 
-  /** Adds a foreign key. The target column must hold a compatible type. */
   reference(ref: ColumnRef<T>): Column<T> {
     return new Column<T>(this.#config.sqlType, {
       ...this.#config,

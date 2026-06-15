@@ -1,8 +1,8 @@
 import queryToPostgres from '../../helpers/postgres/query-to-postgres';
-import type { ColumnRecord, ColumnRef, ColumnRefs } from '../types/orm.types';
-import type { FindOptions, InferRow } from '../types/query.types';
+import { Column } from './Column';
+import type { ColumnRecord, ColumnRef, ColumnRefs, FindOptions, InferRow } from '../types/orm.types';
 
-export class Schema<TName extends string, TCols extends ColumnRecord> {
+export class ORM<TName extends string, TCols extends ColumnRecord> {
   readonly #columns: TCols;
   readonly #tableName: TName;
   readonly #schemaName: string;
@@ -13,18 +13,34 @@ export class Schema<TName extends string, TCols extends ColumnRecord> {
     this.#columns = columns;
   }
 
-  static create<TName extends string, TCols extends ColumnRecord>(
+  static uuid() {
+    return new Column<string | null>('UUID');
+  }
+  static varchar(length: number) {
+    return new Column<string | null>(`VARCHAR(${length})`);
+  }
+  static integer() {
+    return new Column<number | null>('INTEGER');
+  }
+  static bigint() {
+    return new Column<number | null>('BIGINT');
+  }
+  static boolean() {
+    return new Column<boolean | null>('BOOLEAN');
+  }
+
+  static createTable<TName extends string, TCols extends ColumnRecord>(
     tableName: TName,
     schemaName: string,
     columns: TCols
-  ): Schema<TName, TCols> & ColumnRefs<TCols> {
-    const schema = new Schema(tableName, schemaName, columns);
+  ): ORM<TName, TCols> & ColumnRefs<TCols> {
+    const schema = new ORM(tableName, schemaName, columns);
     const table = `${schemaName}.${tableName}`;
     for (const column of Object.keys(columns)) {
       const ref: ColumnRef = { table, column };
       Object.defineProperty(schema, column, { value: ref, enumerable: false });
     }
-    return schema as Schema<TName, TCols> & ColumnRefs<TCols>;
+    return schema as ORM<TName, TCols> & ColumnRefs<TCols>;
   }
 
   #toSQL(): string {
