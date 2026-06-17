@@ -5,11 +5,9 @@ import type { ColumnRecord, ColumnRef, ColumnRefs, FindOptions, InferRow } from 
 export class ORM<TName extends string, TCols extends ColumnRecord> {
   readonly #columns: TCols;
   readonly #tableName: TName;
-  readonly #schemaName: string;
 
-  private constructor(tableName: TName, schemaName: string, columns: TCols) {
+  private constructor(tableName: TName, columns: TCols) {
     this.#tableName = tableName;
-    this.#schemaName = schemaName;
     this.#columns = columns;
   }
 
@@ -29,18 +27,17 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
     return new Column<boolean | null>('BOOLEAN');
   }
 
-  static createTable<TName extends string, TCols extends ColumnRecord>(
+  static async createTable<TName extends string, TCols extends ColumnRecord>(
     tableName: TName,
-    schemaName: string,
     columns: TCols
-  ): ORM<TName, TCols> & ColumnRefs<TCols> {
-    const schema = new ORM(tableName, schemaName, columns);
-    const table = `${schemaName}.${tableName}`;
+  ): Promise<ORM<TName, TCols> & ColumnRefs<TCols>> {
+    const orm = new ORM(tableName, columns);
     for (const column of Object.keys(columns)) {
-      const ref: ColumnRef = { table, column };
-      Object.defineProperty(schema, column, { value: ref, enumerable: false });
+      const ref: ColumnRef = { table: tableName, column };
+      Object.defineProperty(orm, column, { value: ref, enumerable: false });
     }
-    return schema as ORM<TName, TCols> & ColumnRefs<TCols>;
+    await orm.sync();
+    return orm as ORM<TName, TCols> & ColumnRefs<TCols>;
   }
 
   #toSQL(): string {
@@ -48,7 +45,7 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
       .map(([name, col]) => `    ${col.toSQL(name)}`)
       .join(',\n');
 
-    return `CREATE TABLE IF NOT EXISTS ${this.#schemaName}.${this.#tableName} (\n${colDefs}\n)`;
+    return `CREATE TABLE IF NOT EXISTS ${this.#tableName} (\n${colDefs}\n)`;
   }
 
   async findAll(): Promise<InferRow<TCols>[]> {
@@ -63,13 +60,16 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
   }
 
   async #select<TRow>(cols: string): Promise<TRow[]> {
-    const result = await queryToPostgres<TRow>(`SELECT ${cols} FROM ${this.#schemaName}.${this.#tableName}`);
+    const result = await queryToPostgres<TRow>(`SELECT ${cols} FROM ${this.#tableName}`);
     return result ?? [];
   }
 
   async sync(): Promise<void> {
-    await queryToPostgres(`CREATE SCHEMA IF NOT EXISTS ${this.#schemaName}`);
+    const [schema] = this.#tableName.split('.');
+    if (schema !== this.#tableName) {
+      await queryToPostgres(`CREATE SCHEMA IF NOT EXISTS ${schema}`);
+    }
     await queryToPostgres(this.#toSQL());
-    global.log.success({ tag: 'ORM' }, `Synced table "${this.#schemaName}.${this.#tableName}"`);
+    global.log.success({ tag: 'ORM' }, `Synced table "${this.#tableName}"`);
   }
 }
