@@ -1,14 +1,43 @@
-import queryToPostgres from '../../helpers/postgres/query-to-postgres';
+import { Pool, PoolConfig, QueryResultRow } from 'pg';
+import { handleError, CustomError } from '../../utils/handleError';
 import { Column } from './Column';
 import type { ColumnRecord, ColumnRef, ColumnRefs, FindOptions, InferRow } from '../types/orm.types';
 
 export class ORM<TName extends string, TCols extends ColumnRecord> {
+  static #pool: Pool | undefined;
   readonly #columns: TCols;
   readonly #tableName: TName;
 
   private constructor(tableName: TName, columns: TCols) {
     this.#tableName = tableName;
     this.#columns = columns;
+  }
+
+  static connect(config: PoolConfig): void {
+    if (!ORM.#pool) ORM.#pool = new Pool(config);
+  }
+
+  static async checkConnection(): Promise<void> {
+    try {
+      const pool = ORM.#pool;
+      if (!pool) throw new CustomError('DB not connected', 'CONNECT_TO_POSTGRES', 500);
+      const client = await pool.connect();
+      global.log.success({ tag: 'CONNECT TO PG' }, 'Connected successfully to PostGres');
+      client.release();
+    } catch (error: any) {
+      return Promise.reject(error);
+    }
+  }
+
+  static async query<T, R extends QueryResultRow = T & QueryResultRow>(query: string, values?: Array<T[keyof T]>) {
+    try {
+      if (!ORM.#pool) throw new CustomError('DB not connected', 'CONNECT_TO_POSTGRES', 500);
+      const { rows } = await ORM.#pool.query<R>(query, values);
+      return rows;
+    } catch (error) {
+      handleError(error, 'Oops... something went wrong!', 'PG QUERY');
+      return Promise.reject(error);
+    }
   }
 
   static uuid() {
@@ -60,16 +89,16 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
   }
 
   async #select<TRow>(cols: string): Promise<TRow[]> {
-    const result = await queryToPostgres<TRow>(`SELECT ${cols} FROM ${this.#tableName}`);
+    const result = await ORM.query<TRow>(`SELECT ${cols} FROM ${this.#tableName}`);
     return result ?? [];
   }
 
   async sync(): Promise<void> {
     const [schema] = this.#tableName.split('.');
     if (schema !== this.#tableName) {
-      await queryToPostgres(`CREATE SCHEMA IF NOT EXISTS ${schema}`);
+      await ORM.query(`CREATE SCHEMA IF NOT EXISTS ${schema}`);
     }
-    await queryToPostgres(this.#toSQL());
+    await ORM.query(this.#toSQL());
     global.log.success({ tag: 'ORM' }, `Synced table "${this.#tableName}"`);
   }
 }
