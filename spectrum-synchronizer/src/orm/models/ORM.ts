@@ -6,6 +6,7 @@ import { CustomError } from '../../utils/handleError';
 
 export class ORM<TName extends string, TCols extends ColumnRecord> {
   static #pool: Pool | undefined;
+  static #schemas: ORM<string, ColumnRecord>[] = [];
   readonly #columns: TCols;
   readonly #tableName: TName;
 
@@ -21,6 +22,7 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
     const client = await pool.connect();
     global.log.success({ tag: 'CONNECT TO PG' }, 'Connected successfully to PostGres');
     client.release();
+    for (const schema of ORM.#schemas) await schema.#sync();
   }
 
   // להעביר ל #query
@@ -50,17 +52,17 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
     return new Column<boolean | null>('BOOLEAN');
   }
 
-  static async createTable<TName extends string, TCols extends ColumnRecord>(
+  static createSchema<TName extends string, TCols extends ColumnRecord>(
     tableName: TName,
     columns: TCols
-  ): Promise<ORM<TName, TCols> & ColumnRefs<TCols>> {
-    const orm = new ORM(tableName, columns);
+  ): ORM<TName, TCols> & ColumnRefs<TCols> {
+    const schema = new ORM(tableName, columns);
     for (const column of Object.keys(columns)) {
       const ref: ColumnRef = { table: tableName, column };
-      Object.defineProperty(orm, column, { value: ref, enumerable: false });
+      Object.defineProperty(schema, column, { value: ref, enumerable: false });
     }
-    await orm.sync();
-    return orm as ORM<TName, TCols> & ColumnRefs<TCols>;
+    ORM.#schemas.push(schema);
+    return schema as ORM<TName, TCols> & ColumnRefs<TCols>;
   }
 
   #toSQL(): string {
@@ -87,7 +89,7 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
   //   return result ?? [];
   // }
 
-  async sync(): Promise<void> {
+  async #sync(): Promise<void> {
     const table = this.#tableName.split('.');
     if (table.length === 2) await ORM.query(`CREATE SCHEMA IF NOT EXISTS ${table[0]}`);
     await ORM.query(this.#toSQL());
