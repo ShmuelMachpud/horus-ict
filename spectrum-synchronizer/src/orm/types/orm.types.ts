@@ -1,31 +1,40 @@
-import type { ColumnDefinition } from '../core/ColumnDefinition';
+import type { Column } from '../models/Column';
+import { ORM } from '../models/ORM';
 
 export type SqlValue = string | number | boolean | null;
 
 export interface ColumnConfig {
-  readonly sqlType: string;
-  readonly notNull: boolean;
-  readonly primaryKey: boolean;
-  readonly unique: boolean;
-  readonly defaultValue?: string;
-  readonly reference?: { readonly table: string; readonly column: string };
+  sqlType: string;
+  notNull: boolean;
+  primaryKey: boolean;
+  unique: boolean;
+  defaultValue?: string;
+  reference?: { table: string; column: string };
 }
 
-export type ColumnRecord = Record<string, ColumnDefinition<SqlValue>>;
+export type ColumnRecord = Record<string, Column<SqlValue>>;
 
-/** A typed pointer to a specific column of a specific table — used for foreign keys. */
 export interface ColumnRef<T extends SqlValue = SqlValue> {
-  readonly table: string;
-  readonly column: string;
-  /** phantom — carries the referenced column's type for compile-time matching */
-  readonly __type?: T;
+  table: string;
+  column: string;
+  // phantom type
+  __type?: T;
 }
 
-/** Extracts the TS type a column definition holds. */
-export type ColType<C> = C extends ColumnDefinition<infer T> ? T : never;
+export type ColType<C> = C extends Column<infer T> ? T : never;
 
-/** Maps a schema's columns to typed refs: { id: ColumnRef<string>, ... } */
 export type ColumnRefs<TCols extends ColumnRecord> = {
-  readonly [K in keyof TCols & string]: ColumnRef<ColType<TCols[K]>>;
+  [K in keyof TCols & string]: ColumnRef<ColType<TCols[K]>>;
 };
 
+// orm.types.ts
+export type InferTable<T> = T extends ORM<any, infer TCols> ? InferRow<TCols> : never;
+
+// queries types
+export type InferRow<TCols extends ColumnRecord> = {
+  [K in keyof TCols]: TCols[K] extends Column<infer T> ? T : never;
+};
+
+export type FindOptions<TCols extends ColumnRecord, TKeys extends keyof TCols & string = keyof TCols & string> = {
+  select: TKeys[];
+};

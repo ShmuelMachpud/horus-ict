@@ -1,21 +1,19 @@
-import { Schema, column } from '../../orm';
-import { SCHEMAS } from '../../models/schemas.models';
-import { TABLES_SPECTRUM } from '../../models/tables.models';
+import { SPECTRUM_TABLES } from '../../models/tables.models';
+import { ORM } from '../../orm/models/ORM';
 
-const UnitsSchema = Schema.create('units', SCHEMAS.SPECTRUM, {
-  id: column.uuid().default('uuid_generate_v4()').primaryKey(),
-  name: column.varchar(255).notNull(),
+export const UnitsSchema = ORM.createSchema('spectrum.units', {
+  id: ORM.uuid().default('uuid_generate_v4()').primaryKey(),
+  name: ORM.varchar(255).notNull(),
 });
 
-export const ConflictsSchema = Schema.create(TABLES_SPECTRUM.CONFLICTS, SCHEMAS.SPECTRUM, {
-  id: column.uuid().default('uuid_generate_v4()').primaryKey(),
-  created_at: column.bigint().notNull(),
-  updated_at: column.bigint().notNull(),
-  created_by: column.varchar(255),
-  updated_by: column.varchar(255),
-  is_deleted: column.boolean().default('FALSE'),
-  conflict: column.varchar(255).notNull(),
-  effect: column.varchar(255).notNull(),
-  unit_id: column.uuid().reference(UnitsSchema.id).notNull(),
+export const CONFLICT_SCHEMA = ORM.createSchema(SPECTRUM_TABLES.CONFLICTS, {
+  id: ORM.uuid().default('uuid_generate_v4()').primaryKey(),
+  created_at: ORM.bigint().notNull(),
+  updated_at: ORM.bigint().notNull(),
+  created_by: ORM.varchar(255),
+  updated_by: ORM.varchar(255),
+  is_deleted: ORM.boolean().default('FALSE'),
+  conflict: ORM.varchar(255).notNull(),
+  effect: ORM.varchar(255).notNull(),
+  unit_id: ORM.uuid().reference(UnitsSchema.id).notNull(),
 });
-

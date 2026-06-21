@@ -1,11 +1,9 @@
-import queryToPostgres from './query-to-postgres';
-import { ConflictsSchema } from '../../conflicts/queries/createTable.queries';
+import { createTableFunction } from '../../global/functions/create-table.function';
 import { handleError } from '../../utils/handleError';
 
 export const createTables = async () => {
   try {
-    await queryToPostgres(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp" SCHEMA public VERSION "1.1"`);
-    await ConflictsSchema.sync();
+    await createTableFunction('uuid-ossp', `CREATE EXTENSION IF NOT EXISTS "uuid-ossp" SCHEMA public VERSION "1.1"`);
   } catch (error) {
     handleError(error, 'Failed to create tables', 'CREATE TABLES');
   } finally {

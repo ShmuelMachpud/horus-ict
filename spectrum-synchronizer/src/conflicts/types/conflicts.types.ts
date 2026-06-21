@@ -1,11 +1,5 @@
-export interface ConflictInterface {
-  id: string; // uuid;
-  created_at: number;
-  updated_at: number;
-  created_by: string | null;
-  updated_by: string | null;
-  is_deleted: boolean;
-  conflict: string;
-  effect: string;
-}
-export interface CreateConflictInterface extends Omit<ConflictInterface, "id" | "is_deleted"> {}
+import { InferTable } from '../../orm/types/orm.types';
+import { CONFLICT_SCHEMA } from '../queries/createTable.queries';
+
+type ConflictInterface = InferTable<typeof CONFLICT_SCHEMA>;
+export interface CreateConflictInterface extends Omit<ConflictInterface, 'id' | 'is_deleted'> {}
