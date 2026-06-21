@@ -1,3 +1,3 @@
-export const TABLES_SPECTRUM = {
-  CONFLICTS: "conflicts",
+export const SPECTRUM_TABLES = {
+  CONFLICTS: 'conflicts',
 };

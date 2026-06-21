@@ -1,5 +1,5 @@
 import { InferTable } from '../../orm/types/orm.types';
-import { ConflictsSchema } from '../queries/createTable.queries';
+import { CONFLICT_SCHEMA } from '../queries/createTable.queries';
 
-type ConflictInterface = InferTable<typeof ConflictsSchema>;
+type ConflictInterface = InferTable<typeof CONFLICT_SCHEMA>;
 export interface CreateConflictInterface extends Omit<ConflictInterface, 'id' | 'is_deleted'> {}

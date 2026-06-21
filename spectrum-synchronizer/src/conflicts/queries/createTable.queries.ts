@@ -1,11 +1,12 @@
+import { SPECTRUM_TABLES } from '../../models/tables.models';
 import { ORM } from '../../orm/models/ORM';
 
-export const UnitsSchema = await ORM.createTable('spectrum.units', {
+export const UnitsSchema = ORM.createTable('spectrum.units', {
   id: ORM.uuid().default('uuid_generate_v4()').primaryKey(),
   name: ORM.varchar(255).notNull(),
 });
 
-export const ConflictsSchema = await ORM.createTable('spectrum.conflicts', {
+export const CONFLICT_SCHEMA = ORM.createTable(SPECTRUM_TABLES.CONFLICTS, {
   id: ORM.uuid().default('uuid_generate_v4()').primaryKey(),
   created_at: ORM.bigint().notNull(),
   updated_at: ORM.bigint().notNull(),

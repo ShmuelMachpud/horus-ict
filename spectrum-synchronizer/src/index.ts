@@ -5,8 +5,7 @@ import { syncTables } from './helpers/postgres/sync-tables';
 import { ORM } from './orm/models/ORM';
 import { handleError } from './utils/handleError';
 
-ORM.connect(config);
-ORM.checkConnection()
+ORM.connect(config)
   .then(() => createTables())
   .then(() => syncTables())
   .catch((error) => handleError(error, 'Failed to run server:', 'INITIAL SERVER'));
