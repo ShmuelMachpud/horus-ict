@@ -1,0 +1,10 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "ignorePatterns": [".eslintrc.json", "*.svg", "*.json"],
+    "plugins": ["import", "@typescript-eslint"],
+
+    "rules": {
+        "import/no-unused-modules": "error",
+        "@typescript-eslint/no-explicit-any": "error"
+    }
+}

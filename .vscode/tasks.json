@@ -2,19 +2,258 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "spectrum-synchronizer",
+            "label": "auth-service",
             "type": "shell",
-            "command": "cd spectrum-synchronizer ; npm i ; npm run build ; npm run dev",
-            "problemMatcher": [],
-            "icon": {"color": "terminal.ansiMagenta", "id": "server-environment"},
+            "command": "cd auth-service ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiCyan",
+                "id": "shield"
+            },
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}",
                 "shell": {
-  "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
-  "args": ["-c"]
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
                 }
             }
+        },
+        {
+            "label": "black-list-server",
+            "type": "shell",
+            "command": "cd black-list-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiRed",
+                "id": "shield"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "fss-server",
+            "type": "shell",
+            "command": "cd fss-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "cac-server",
+            "type": "shell",
+            "command": "cd cac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "dnd-server",
+            "type": "shell",
+            "command": "cd dnd-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "log-server",
+            "type": "shell",
+            "command": "cd log-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "mac-server",
+            "type": "shell",
+            "command": "cd mac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "socket-server",
+            "type": "shell",
+            "command": "cd socket-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "unit-tag",
+            "type": "shell",
+            "command": "cd unit-symbols ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiBlue",
+                "id": "organization"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "files-server",
+            "type": "shell",
+            "command": "cd files-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiYellow",
+                "id": "file-pdf"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "mongo-server",
+            "type": "shell",
+            "command": "cd mongo-server ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "spectrum-server",
+            "type": "shell",
+            "command": "cd spectrum-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "problemMatcher":[],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "spectrum-synchronizer",
+            "type": "shell",
+            "command": "cd spectrum-synchronizer ; npm i ; npm run build ; npm run dev",
+            "problemMatcher": [],
+            "icon": {
+                "color": "terminal.ansiMagenta",
+                 "id": "server-environment"
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoExit", "-Command"]
+                }
+            }
+        },
+        {
+            "label": "Run All Servers",
+            "dependsOn":[
+                "auth-service",
+                "black-list-server",
+                "cac-server",
+                "mac-server",
+                "dnd-server",
+                "fss-server",
+                "spectrum-server",
+                "socket-server",
+                "files-server",
+                "log-server",
+                "mongo-server",
+                "unit-tag",
+                // "black-list-server",
+            ],
+            "problemMatcher":[],
+            "group": "build"
         }
     ]
 }
