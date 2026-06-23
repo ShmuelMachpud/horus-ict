@@ -1,4 +1,40 @@
+# Dependencies
 node_modules
+.pnp.*
+
+# Environment
 .env
+.env*
+*.env
+*.local
+
+# Build
+dist
+dist/
+.dist
+.tsbuildinfo
+
+# Logs
+*.log
+
+# Cache
+.npm
+.cache
+.cache/
+.eslintcache
+.stylelintcache
+
+# NX
+.nx/cache
+
+# Security
+root.ca.txt
+root.pem.txt
+root.key.txt
 ARGOCD_SECRETS.yaml
+
+# Lock
 *lock.json
+
+# Test
+junit.xml

@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "cac-server",
+  "projectType": "application",
+  "sourceRoot": "apps/cac-server/src",
+  "implicitDependencies": ["shared-types"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc",
+        "cwd": "apps/cac-server"
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nodemon --config ../../nodemon.json",
+        "cwd": "apps/cac-server"
+      }
+    }
+  }
+}

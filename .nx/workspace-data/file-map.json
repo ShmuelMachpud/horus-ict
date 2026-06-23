@@ -1,0 +1,844 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.8.4",
+  "pathMappings": {
+    "@horus/shared-types": [
+      "./libs/shared-types/dist/index"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "spectrum-synchronizer/dist/conflicts/dal/conflcts.dal.js",
+        "hash": "5468936892951256278"
+      },
+      {
+        "file": "files-server/src/utils/environments.ts",
+        "hash": "13720035707392845680"
+      },
+      {
+        "file": "spectrum-synchronizer/src/helpers/pino.ts",
+        "hash": "14593140938010377195"
+      },
+      {
+        "file": "black-list-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "auth-service/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "fss-server/src/utils/environments.ts",
+        "hash": "17256673952048881384"
+      },
+      {
+        "file": "log-server/src/index.ts",
+        "hash": "13412771287136825099"
+      },
+      {
+        "file": "mongo-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "fss-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "frontend/public/favicon.svg",
+        "hash": "9681363740239943431"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/helpers/postgres/connect-to-postgres.js",
+        "hash": "17326537860525410965"
+      },
+      {
+        "file": "package.json",
+        "hash": "17856567848296791320"
+      },
+      {
+        "file": "spectrum-synchronizer/src/global/functions/create-table.function.ts",
+        "hash": "14931347176774352752"
+      },
+      {
+        "file": "spectrum-synchronizer/src/utils/environments.ts",
+        "hash": "4825557498498802253"
+      },
+      {
+        "file": "spectrum-synchronizer/tsconfig.json",
+        "hash": "8621704706158884281"
+      },
+      {
+        "file": "unit-symbols/src/index.ts",
+        "hash": "7774597900464025222"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "11457073102196549367"
+      },
+      {
+        "file": "fss-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "frontend/src/main.tsx",
+        "hash": "1718379431751548352"
+      },
+      {
+        "file": "spectrum-synchronizer/src/conflicts/queries/createTable.queries.ts",
+        "hash": "2816607135983158030"
+      },
+      {
+        "file": "dnd-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/orm/types/query.types.js",
+        "hash": "6997712579049825253"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/helpers/postgres/config-client.js",
+        "hash": "8215746316468091696"
+      },
+      {
+        "file": "spectrum-synchronizer/src/conflicts/queries/conflicts.queries.ts",
+        "hash": "4939005113291614027"
+      },
+      {
+        "file": "docker-compose.dev.yml",
+        "hash": "13147070402940871607"
+      },
+      {
+        "file": "socket-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "cac-server/package.json",
+        "hash": "7944355002286371712"
+      },
+      {
+        "file": "mongo-server/src/utils/environments.ts",
+        "hash": "4621968223675912444"
+      },
+      {
+        "file": "gateway/nginx.conf",
+        "hash": "10999421212491472461"
+      },
+      {
+        "file": "mac-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "unit-symbols/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "auth-service/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "dnd-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "socket-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "mongo-server/src/index.ts",
+        "hash": "6452694604049616172"
+      },
+      {
+        "file": "black-list-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "dnd-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "frontend/tsconfig.node.json",
+        "hash": "1309366919937045687"
+      },
+      {
+        "file": "README.md",
+        "hash": "9236145413761338185"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/conflicts/queries/conflicts.queries.js",
+        "hash": "10379469624174381056"
+      },
+      {
+        "file": "files-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "frontend/src/index.css",
+        "hash": "5830485047622593227"
+      },
+      {
+        "file": "mac-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "mac-server/package.json",
+        "hash": "8910254995592545910"
+      },
+      {
+        "file": "dnd-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "dnd-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "log-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/orm/models/Schema.js",
+        "hash": "10147336242943231052"
+      },
+      {
+        "file": "socket-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-synchronizer/src/conflicts/dal/conflcts.dal.ts",
+        "hash": "16077666543287108592"
+      },
+      {
+        "file": "spectrum-synchronizer/src/types/logger.types.ts",
+        "hash": "467581121994928637"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "10926318622699293154"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "1854040733454355583"
+      },
+      {
+        "file": "spectrum-synchronizer/src/conflicts/types/conflicts.types.ts",
+        "hash": "3859081584999942621"
+      },
+      {
+        "file": "unit-symbols/tsconfig.json",
+        "hash": "6270365424629252879"
+      },
+      {
+        "file": "files-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "spectrum-server/src/index.ts",
+        "hash": "13911598780538972266"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/conflicts/helpers/conflict.mock.js",
+        "hash": "1261108906864574555"
+      },
+      {
+        "file": "mac-server/src/utils/environments.ts",
+        "hash": "14955063458370719286"
+      },
+      {
+        "file": "log-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "unit-symbols/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "frontend/src/global/helpers/normalize-location.ts",
+        "hash": "3714314209481251900"
+      },
+      {
+        "file": "fss-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "dnd-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "frontend/package.json",
+        "hash": "13610079628908572833"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/utils/environments.js",
+        "hash": "11588293728681362757"
+      },
+      {
+        "file": "black-list-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "log-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "mongo-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/orm/models/ORM.js",
+        "hash": "12115555028049702343"
+      },
+      {
+        "file": "spectrum-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "spectrum-synchronizer/src/index.ts",
+        "hash": "14946889867835531756"
+      },
+      {
+        "file": "mac-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/models/tables.models.js",
+        "hash": "7968333647355403150"
+      },
+      {
+        "file": "dnd-server/src/index.ts",
+        "hash": "14869347661773255499"
+      },
+      {
+        "file": "spectrum-synchronizer/src/orm/models/ORM.ts",
+        "hash": "15436839380430054171"
+      },
+      {
+        "file": "unit-symbols/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "log-server/src/utils/environments.ts",
+        "hash": "5573936865570225768"
+      },
+      {
+        "file": "unit-symbols/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "nx.json",
+        "hash": "17126555982983794897"
+      },
+      {
+        "file": "mac-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "socket-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-synchronizer/src/helpers/postgres/create-tables.ts",
+        "hash": "15251186672159623871"
+      },
+      {
+        "file": "black-list-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "socket-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/conflicts/queries/createTable.queries.js",
+        "hash": "1788820565677075580"
+      },
+      {
+        "file": "files-server/Dockerfile",
+        "hash": "14786623081668676158"
+      },
+      {
+        "file": "cac-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/helpers/time.helpers.js",
+        "hash": "13752540615139198937"
+      },
+      {
+        "file": "unit-symbols/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "auth-service/src/server.ts",
+        "hash": "3697187737011402666"
+      },
+      {
+        "file": "black-list-server/src/utils/environments.ts",
+        "hash": "17730059484658455034"
+      },
+      {
+        "file": "log-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "unit-symbols/package.json",
+        "hash": "12745490219879769598"
+      },
+      {
+        "file": "auth-service/tsconfig.json",
+        "hash": "6270365424629252879"
+      },
+      {
+        "file": "spectrum-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-synchronizer/src/models/tables.models.ts",
+        "hash": "8626139015941423459"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/models/schemas.models.js",
+        "hash": "16338409486138505194"
+      },
+      {
+        "file": "frontend/.gitignore",
+        "hash": "987422939859577920"
+      },
+      {
+        "file": "files-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "frontend/src/App.tsx",
+        "hash": "6387651266195678612"
+      },
+      {
+        "file": "frontend/src/mac/platforms/types/platforms.types.ts",
+        "hash": "4384228615467363943"
+      },
+      {
+        "file": "frontend/tsconfig.app.json",
+        "hash": "8826483501902712748"
+      },
+      {
+        "file": "log-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "socket-server/src/utils/environments.ts",
+        "hash": "9083730049906369375"
+      },
+      {
+        "file": "spectrum-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "dnd-server/package.json",
+        "hash": "1086529708592044739"
+      },
+      {
+        "file": ".vscode/tasks.json",
+        "hash": "11336667703787938604"
+      },
+      {
+        "file": "frontend/README.md",
+        "hash": "12183045292125642857"
+      },
+      {
+        "file": "mac-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "socket-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/helpers/pino.js",
+        "hash": "3470727431711403785"
+      },
+      {
+        "file": "frontend/index.html",
+        "hash": "16487566442639422799"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/helpers/postgres/create-tables.js",
+        "hash": "14669969278813384827"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/conflicts/types/conflicts.types.js",
+        "hash": "6997712579049825253"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/helpers/postgres/sync-tables.js",
+        "hash": "14788326758594943924"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/orm/types/orm.types.js",
+        "hash": "6997712579049825253"
+      },
+      {
+        "file": "unit-symbols/src/utils/environments.ts",
+        "hash": "11352790459250843480"
+      },
+      {
+        "file": "spectrum-synchronizer/src/orm/models/Column.ts",
+        "hash": "1107812285977927877"
+      },
+      {
+        "file": "dnd-server/src/utils/environments.ts",
+        "hash": "10188989797788500048"
+      },
+      {
+        "file": "fss-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "files-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "spectrum-synchronizer/src/utils/handleError.ts",
+        "hash": "7132706127200361171"
+      },
+      {
+        "file": "files-server/src/index.ts",
+        "hash": "1600272170292566746"
+      },
+      {
+        "file": "fss-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "log-server/package.json",
+        "hash": "18380001352243334357"
+      },
+      {
+        "file": "mongo-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/index.js",
+        "hash": "12822534026414139706"
+      },
+      {
+        "file": "fss-server/package.json",
+        "hash": "17388721715449614438"
+      },
+      {
+        "file": "spectrum-synchronizer/src/conflicts/helpers/conflict.mock.ts",
+        "hash": "12959188411372402762"
+      },
+      {
+        "file": "frontend/public/icons.svg",
+        "hash": "4514104262053905079"
+      },
+      {
+        "file": "mongo-server/package.json",
+        "hash": "16094084729270131513"
+      },
+      {
+        "file": "socket-server/package.json",
+        "hash": "6451706402210800464"
+      },
+      {
+        "file": "spectrum-synchronizer/src/helpers/postgres/sync-tables.ts",
+        "hash": "17234618756428229050"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/utils/handleError.js",
+        "hash": "5067264563504035986"
+      },
+      {
+        "file": "spectrum-synchronizer/src/helpers/time.helpers.ts",
+        "hash": "444877481592338276"
+      },
+      {
+        "file": "spectrum-synchronizer/src/models/schemas.models.ts",
+        "hash": "1492709165525646180"
+      },
+      {
+        "file": "mongo-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "spectrum-synchronizer/src/orm/types/orm.types.ts",
+        "hash": "7842361846614864911"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/types/logger.types.js",
+        "hash": "6997712579049825253"
+      },
+      {
+        "file": "mongo-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/helpers/postgres/query-to-postgres.js",
+        "hash": "6133296743294456530"
+      },
+      {
+        "file": "mac-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "fss-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "black-list-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "black-list-server/package.json",
+        "hash": "10671991830943171543"
+      },
+      {
+        "file": "fss-server/src/index.ts",
+        "hash": "9387671731009552051"
+      },
+      {
+        "file": "spectrum-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "black-list-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "frontend/vite.config.ts",
+        "hash": "13144531941992273019"
+      },
+      {
+        "file": "log-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "auth-service/package.json",
+        "hash": "2210382061449583106"
+      },
+      {
+        "file": "nodemon.json",
+        "hash": "15274636648929098759"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/orm/models/Column.js",
+        "hash": "3316808111100868460"
+      },
+      {
+        "file": "spectrum-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "files-server/Dockerfile.dev",
+        "hash": "3281042562456170143"
+      },
+      {
+        "file": "spectrum-server/.gitignore",
+        "hash": "11352206819369573596"
+      },
+      {
+        "file": "spectrum-server/package.json",
+        "hash": "9725836973760563498"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/global/functions/create-table.function.js",
+        "hash": "9705787706822031933"
+      },
+      {
+        "file": "auth-service/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "cac-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "socket-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-server/src/utils/environments.ts",
+        "hash": "331962236738383739"
+      },
+      {
+        "file": "cac-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "dnd-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "black-list-server/src/index.ts",
+        "hash": "8071047881015679078"
+      },
+      {
+        "file": "mongo-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "cac-server/Dockerfile",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "mac-server/src/index.ts",
+        "hash": "5028416659696034458"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/orm/index.js",
+        "hash": "7796048094716521751"
+      },
+      {
+        "file": "cac-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "auth-service/nodemon.json",
+        "hash": "7168430516836885661"
+      },
+      {
+        "file": "cac-server/src/utils/environments.ts",
+        "hash": "2791497172338348434"
+      },
+      {
+        "file": "frontend/.eslintrc.json",
+        "hash": "18376136105689036391"
+      },
+      {
+        "file": "mac-server/tsconfig.json",
+        "hash": "976727663672576676"
+      },
+      {
+        "file": "files-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "frontend/src/mac/platforms/helpers/normalized.helpers.ts",
+        "hash": "5365220318269822958"
+      },
+      {
+        "file": "cac-server/src/index.ts",
+        "hash": "10513329623958538381"
+      },
+      {
+        "file": "cac-server/.eslintrc.json",
+        "hash": "7191284763073127540"
+      },
+      {
+        "file": "files-server/package.json",
+        "hash": "507597130570155963"
+      },
+      {
+        "file": "log-server/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/conflicts/services/conflicts.service.js",
+        "hash": "8020763382790972225"
+      },
+      {
+        "file": "spectrum-synchronizer/dist/orm/column.js",
+        "hash": "7796048094716521751"
+      },
+      {
+        "file": "spectrum-synchronizer/package.json",
+        "hash": "788525610715413572"
+      },
+      {
+        "file": "fss-server/nodemon.json",
+        "hash": "11732002349717468506"
+      },
+      {
+        "file": "files-server/tsconfig.json",
+        "hash": "8972996197298989562"
+      },
+      {
+        "file": "mongo-server/.npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "socket-server/src/index.ts",
+        "hash": "5462593911485484258"
+      },
+      {
+        "file": "spectrum-synchronizer/src/conflicts/services/conflicts.service.ts",
+        "hash": "13852560908593941398"
+      },
+      {
+        "file": "spectrum-synchronizer/src/helpers/postgres/config-client.ts",
+        "hash": "16099618300129961611"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "16034482343935906894"
+      },
+      {
+        "file": "frontend/src/App.css",
+        "hash": "11604919666914838213"
+      },
+      {
+        "file": "frontend/eslint.config.js",
+        "hash": "2326506315562336924"
+      },
+      {
+        "file": "frontend/tsconfig.json",
+        "hash": "11226547063925144724"
+      }
+    ],
+    "projectFileMap": {
+      "cac-server": [
+        {
+          "file": "apps/cac-server/dist/index.js",
+          "hash": "184465092612693443"
+        },
+        {
+          "file": "apps/cac-server/dist/utils/environments.js",
+          "hash": "8861889901081791946"
+        },
+        {
+          "file": "apps/cac-server/project.json",
+          "hash": "8483334264035926762"
+        },
+        {
+          "file": "apps/cac-server/src/index.ts",
+          "hash": "1853800196654521060"
+        },
+        {
+          "file": "apps/cac-server/src/utils/environments.ts",
+          "hash": "2791497172338348434"
+        },
+        {
+          "file": "apps/cac-server/tsconfig.json",
+          "hash": "6959088816459794856"
+        }
+      ],
+      "shared-types": [
+        {
+          "file": "libs/shared-types/dist/index.d.ts",
+          "hash": "7110216176998981733"
+        },
+        {
+          "file": "libs/shared-types/dist/index.js",
+          "hash": "10533815908077531553"
+        },
+        {
+          "file": "libs/shared-types/project.json",
+          "hash": "5468778507769029435"
+        },
+        {
+          "file": "libs/shared-types/src/index.ts",
+          "hash": "14856294828283996184"
+        },
+        {
+          "file": "libs/shared-types/tsconfig.json",
+          "hash": "11244122923486534086"
+        }
+      ]
+    }
+  }
+}
