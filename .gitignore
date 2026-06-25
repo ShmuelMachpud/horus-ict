@@ -26,6 +26,7 @@ dist/
 
 # NX
 .nx/cache
+.nx/workspace-data
 
 # Security
 root.ca.txt

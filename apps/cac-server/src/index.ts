@@ -1,12 +1,9 @@
+import '@horus/shared';
 import express from 'express';
-import { PORT } from './utils/environments';
-import { Test } from '@horus/shared-types';
+import { CAC_SERVER_PORT as PORT } from '@horus/shared';
 
-const test: Test = {
-  test: 'uhuh',
-};
-console.log(test);
+// console.log(test);
 
 const app = express();
 
-app.listen(PORT, () => console.log(`CAC Server is running on port ${PORT}`));
+app.listen(PORT, () => global.log.info(`CAC Server is running on port ${PORT}`));
