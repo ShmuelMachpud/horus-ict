@@ -1,23 +1,22 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "cac-server",
-  "projectType": "application",
-  "sourceRoot": "apps/cac-server/src",
-  "implicitDependencies": ["shared"],
+  "name": "shared",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/src",
   "targets": {
     "build": {
       "outputs": ["{projectRoot}/dist"],
       "executor": "nx:run-commands",
       "options": {
         "command": "tsc",
-        "cwd": "apps/cac-server"
+        "cwd": "libs/shared"
       }
     },
     "dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nodemon --config ../../nodemon.json",
-        "cwd": "apps/cac-server"
+        "command": "tsc -w",
+        "cwd": "libs/shared"
       }
     }
   }

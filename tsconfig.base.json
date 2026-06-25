@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "commonjs",
+    "types": ["node"],
     "strict": true,
-    "removeComments": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "skipLibCheck": true,
-    "noImplicitAny": false,
-    "esModuleInterop": true,
-    "lib": ["dom", "esnext"],
-    "types": ["node"],
+    "noImplicitReturns": true,
+    "allowUnreachableCode": false,
+    // "noImplicitAny": false,
+    // "ignoreDeprecations": "6.0",
+    // "baseUrl": ".",
     "paths": {
-      "@horus/shared-types": ["./libs/shared-types/dist/index"]
+      "@horus/shared": ["./libs/shared/dist/index"]
     }
   }
 }
