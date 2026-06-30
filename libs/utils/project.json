@@ -1,22 +1,23 @@
 {
+  "name": "utils",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "shared",
+  "sourceRoot": "libs/utils/src",
   "projectType": "library",
-  "sourceRoot": "libs/shared/src",
+  "tags": ["type:lib"],
   "targets": {
     "build": {
       "outputs": ["{projectRoot}/dist"],
       "executor": "nx:run-commands",
       "options": {
         "command": "tsc",
-        "cwd": "libs/shared"
+        "cwd": "libs/utils"
       }
     },
     "dev": {
       "executor": "nx:run-commands",
       "options": {
         "command": "tsc -w",
-        "cwd": "libs/shared"
+        "cwd": "libs/utils"
       }
     }
   }

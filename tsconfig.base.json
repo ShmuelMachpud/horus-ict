@@ -16,7 +16,10 @@
     // "ignoreDeprecations": "6.0",
     // "baseUrl": ".",
     "paths": {
-      "@horus/shared": ["./libs/shared/dist/index"]
+      "@zayad/types": ["./libs/types/dist/index"],
+      "@zayad/utils": ["./libs/utils/dist/index"],
+      "@zayad/helpers": ["./libs/helpers/dist/index"],
+      "@zayad/middlewares": ["./libs/middlewares/dist/index"]
     }
   }
 }

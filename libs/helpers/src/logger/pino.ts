@@ -1,7 +1,7 @@
 import pino, { Logger } from 'pino';
 import pretty from 'pino-pretty';
 import { loggerTime } from './time.helpers';
-import { NODE_ENV } from '../utils/environments';
+import { NODE_ENV } from '@zayad/utils';
 
 declare global {
   var log: Logger<'success'>;
