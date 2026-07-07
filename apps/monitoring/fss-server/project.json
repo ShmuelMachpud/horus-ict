@@ -4,22 +4,8 @@
   "projectType": "application",
   "sourceRoot": "apps/monitoring/fss-server/src",
   "tags": ["type:app"],
-  "implicitDependencies": [ "helpers", "middlewares","utils", "types"],
   "targets": {
-    "build": {
-      "outputs": ["{projectRoot}/dist"],
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "tsc",
-        "cwd": "apps/monitoring/fss-server"
-      }
-    },
-    "dev": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "nodemon --config ../../../nodemon.json",
-        "cwd": "apps/monitoring/fss-server"
-      }
-    }
+    "build": {},
+    "dev": {}
   }
 }

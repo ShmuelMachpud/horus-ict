@@ -1,20 +1,23 @@
 {
-"$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "zayad",
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "test", "lint"]
-      }
-    }
-  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
-     "dev": {
-      "dependsOn": ["^build"]
-    },
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "cache": true,
+      "outputs": ["{projectRoot}/dist"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nodemon --config ../../../nodemon.json",
+        "cwd": "{projectRoot}"
+      }
     }
   }
 }

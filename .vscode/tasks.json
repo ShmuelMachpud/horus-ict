@@ -4,7 +4,8 @@
         {
             "label": "auth-service",
             "type": "shell",
-            "command": "cd auth-service ; npm i ; npm run build ; npm run dev",
+            // "command": "cd auth-service ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev auth-service",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiCyan",
@@ -22,7 +23,8 @@
         {
             "label": "black-list-server",
             "type": "shell",
-            "command": "cd black-list-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd black-list-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev black-list-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiRed",
@@ -40,7 +42,8 @@
         {
             "label": "fss-server",
             "type": "shell",
-            "command": "cd fss-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd fss-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev fss-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiMagenta",
@@ -58,7 +61,8 @@
         {
             "label": "cac-server",
             "type": "shell",
-            "command": "cd cac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd cac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev cac-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiMagenta",
@@ -76,7 +80,8 @@
         {
             "label": "dnd-server",
             "type": "shell",
-            "command": "cd dnd-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd dnd-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev dnd-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiMagenta",
@@ -94,7 +99,8 @@
         {
             "label": "log-server",
             "type": "shell",
-            "command": "cd log-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd log-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev log-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiMagenta",
@@ -112,7 +118,8 @@
         {
             "label": "mac-server",
             "type": "shell",
-            "command": "cd mac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd mac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev mac-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiMagenta",
@@ -128,9 +135,10 @@
             }
         },
         {
-            "label": "socket-server",
+            "label": "notification-server",
             "type": "shell",
-            "command": "cd socket-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd socket-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev notification-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiMagenta",
@@ -148,7 +156,8 @@
         {
             "label": "unit-tag",
             "type": "shell",
-            "command": "cd unit-symbols ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd unit-symbols ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev unit-tag",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiBlue",
@@ -166,7 +175,8 @@
         {
             "label": "files-server",
             "type": "shell",
-            "command": "cd files-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd files-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev files-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiYellow",
@@ -182,9 +192,10 @@
             }
         },
         {
-            "label": "mongo-server",
+            "label": "layout-server",
             "type": "shell",
-            "command": "cd mongo-server ; npm i ; npm run build ; npm run dev",
+            // "command": "cd mongo-server ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev layout-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiMagenta",
@@ -202,7 +213,8 @@
         {
             "label": "spectrum-server",
             "type": "shell",
-            "command": "cd spectrum-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            // "command": "cd spectrum-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+            "command": "npx nx dev spectrum-server",
             "problemMatcher":[],
             "icon": {
                 "color": "terminal.ansiMagenta",
@@ -236,7 +248,18 @@
             }
         },
         {
-            "label": "Run All Servers",
+            "label": "warmup",
+            "type": "shell",
+            "command": "npx nx run-many --target=build --projects=tag:type:lib",
+            "problemMatcher": [],
+            "isBackground": false,
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-Command"] }
+            }
+        },
+        {
+            "label": "Run All Dev",
             "dependsOn":[
                 "auth-service",
                 "black-list-server",
@@ -245,13 +268,20 @@
                 "dnd-server",
                 "fss-server",
                 "spectrum-server",
-                "socket-server",
+                "notification-server",
                 "files-server",
                 "log-server",
-                "mongo-server",
-                "unit-tag",
-                // "black-list-server",
+                "layout-server",
+                "unit-tag"
             ],
+            "dependsOrder": "parallel",
+            "problemMatcher":[],
+            "group": "build"
+        },
+        {
+            "label": "Run All Servers",
+            "dependsOn":["warmup", "Run All Dev"],
+            "dependsOrder": "sequence",
             "problemMatcher":[],
             "group": "build"
         }
