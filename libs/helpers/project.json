@@ -1,0 +1,25 @@
+{
+  "name": "helpers",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/helpers/src",
+  "projectType": "library",
+  "tags": ["type:lib"],
+  "implicitDependencies": ["types", "utils"],
+  "targets": {
+    "build": {
+      "outputs": ["{projectRoot}/dist"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc",
+        "cwd": "libs/helpers"
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -w",
+        "cwd": "libs/helpers"
+      }
+    }
+  }
+}

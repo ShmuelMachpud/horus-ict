@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "unit-tag",
+  "projectType": "application",
+  "sourceRoot": "apps/global/unit-tag/src",
+  "tags": ["type:app"],
+  "implicitDependencies": [ "helpers", "middlewares","utils", "types"],
+  "targets": {
+    "build": {
+      "outputs": ["{projectRoot}/dist"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc",
+        "cwd": "apps/global/unit-tag"
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nodemon --config ../../../nodemon.json",
+        "cwd": "apps/global/unit-tag"
+      }
+    }
+  }
+}

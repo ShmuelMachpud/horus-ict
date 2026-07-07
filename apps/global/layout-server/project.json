@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "layout-server",
+  "projectType": "application",
+  "sourceRoot": "apps/global/layout-server/src",
+  "tags": ["type:app"],
+  "implicitDependencies": [ "helpers", "middlewares","utils", "types"],
+  "targets": {
+    "build": {
+      "outputs": ["{projectRoot}/dist"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc",
+        "cwd": "apps/global/layout-server"
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nodemon --config ../../../nodemon.json",
+        "cwd": "apps/global/layout-server"
+      }
+    }
+  }
+}

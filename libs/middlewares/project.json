@@ -1,0 +1,25 @@
+{
+  "name": "middlewares",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/middlewares/src",
+  "projectType": "library",
+  "tags": ["type:lib"],
+  "implicitDependencies": ["types", "utils", "helpers"],
+  "targets": {
+    "build": {
+      "outputs": ["{projectRoot}/dist"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc",
+        "cwd": "libs/middlewares"
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -w",
+        "cwd": "libs/middlewares"
+      }
+    }
+  }
+}
