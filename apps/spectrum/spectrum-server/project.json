@@ -1,8 +1,8 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "name": "cac-server",
+  "name": "spectrum-server",
   "projectType": "application",
-  "sourceRoot": "apps/command-and-control/cac-server/src",
+  "sourceRoot": "apps/spectrum/spectrum-server/src",
   "tags": ["type:app"],
   "targets": {
     "build": {},
