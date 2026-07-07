@@ -19,3 +19,17 @@ export const pg = new Pool({
   idleTimeoutMillis: 45_000,
   connectionTimeoutMillis: 10_000,
 });
+
+pg.on('error', (err) => {
+  global.log.error({ tag: 'PG_POOL_ERROR' }, `Unexpected pool error - ${err.message}`);
+});
+
+export const checkPostgresConnection = async () => {
+  try {
+    const client = await pg.connect();
+    global.log.info({ tag: 'CONNECT TO PG' }, 'Connected successfully to Postgres DB');
+    client.release();
+  } catch (error) {
+    global.log.error({ tag: 'CONNECT TO PG' }, 'Failed to connect to Postgres DB');
+  }
+};

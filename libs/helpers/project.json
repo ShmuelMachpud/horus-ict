@@ -4,6 +4,7 @@
   "sourceRoot": "libs/helpers/src",
   "projectType": "library",
   "tags": ["type:lib"],
+  "implicitDependencies": ["types", "utils"],
   "targets": {
     "build": {
       "outputs": ["{projectRoot}/dist"],

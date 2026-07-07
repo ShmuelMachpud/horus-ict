@@ -6,4 +6,5 @@ export type TagsLoggerType =
   | 'AUTH'
   | 'VALIDATION ERROR'
   | 'SERVER ERROR'
-  | 'TOKEN';
+  | 'TOKEN'
+  | 'SQL_INJECTION';

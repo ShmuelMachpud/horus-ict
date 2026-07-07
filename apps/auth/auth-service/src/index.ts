@@ -1,7 +1,7 @@
 import '@zayad/helpers';
 import { checkPostgresConnection } from '@zayad/helpers';
 import { corsMiddleware, handleServerError, helmetMiddleware, pinoMiddleware, sqlInjection } from '@zayad/middlewares';
-import { CAC_SERVER_PORT as PORT } from '@zayad/utils';
+import { AUTH_SERVICE_PORT as PORT } from '@zayad/utils';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
@@ -11,9 +11,11 @@ app.use(pinoMiddleware);
 app.use(sqlInjection);
 app.use(helmetMiddleware);
 app.use(corsMiddleware);
-app.use(express.json());
-app.use(express.static('./public'));
 app.use(cookieParser());
+app.use(express.json());
+app.use(express.text());
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 // app.use(metrics);
 // app.use(router);
 

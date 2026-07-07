@@ -1,20 +1,14 @@
 import '@zayad/helpers';
 import { checkPostgresConnection } from '@zayad/helpers';
-import { corsMiddleware, handleServerError, helmetMiddleware, pinoMiddleware, sqlInjection } from '@zayad/middlewares';
-import { CAC_SERVER_PORT as PORT } from '@zayad/utils';
-import cookieParser from 'cookie-parser';
+import { handleServerError, helmetMiddleware, pinoMiddleware } from '@zayad/middlewares';
+import { LOG_SERVER_PORT as PORT } from '@zayad/utils';
 import express from 'express';
 
 const app = express();
 
-app.use(pinoMiddleware);
-app.use(sqlInjection);
 app.use(helmetMiddleware);
-app.use(corsMiddleware);
+app.use(pinoMiddleware);
 app.use(express.json());
-app.use(express.static('./public'));
-app.use(cookieParser());
-// app.use(metrics);
 // app.use(router);
 
 checkPostgresConnection()

@@ -1,9 +1,5 @@
 {
   "name": "@zayad/helpers",
   "version": "1.0.0",
-  "main": "dist/index.js",
-    "dependencies": {
-    "@zayad/types": "*",
-    "@zayad/utils": "*"
-  }
+  "main": "dist/index.js"
 }

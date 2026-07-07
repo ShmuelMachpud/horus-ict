@@ -1,8 +1,8 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "name": "cac-server",
+  "name": "mac-server",
   "projectType": "application",
-  "sourceRoot": "apps/command-and-control/cac-server/src",
+  "sourceRoot": "apps/monitoring/mac-server/src",
   "tags": ["type:app"],
   "implicitDependencies": [ "helpers", "middlewares","utils", "types"],
   "targets": {
@@ -11,14 +11,14 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "tsc",
-        "cwd": "apps/command-and-control/cac-server"
+        "cwd": "apps/monitoring/mac-server"
       }
     },
     "dev": {
       "executor": "nx:run-commands",
       "options": {
         "command": "nodemon --config ../../../nodemon.json",
-        "cwd": "apps/command-and-control/cac-server"
+        "cwd": "apps/monitoring/mac-server"
       }
     }
   }

@@ -1,10 +1,5 @@
 {
   "name": "@zayad/middlewares",
   "version": "1.0.0",
-  "main": "dist/index.js",
-    "dependencies": {
-    "@zayad/types": "*",
-    "@zayad/utils": "*",
-    "@zayad/helpers": "*"
-  }
+  "main": "dist/index.js"
 }
