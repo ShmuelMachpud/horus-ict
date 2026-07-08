@@ -7,8 +7,8 @@ import Router from './global/routes/router/Router'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
-  <ThemeProvider>
-    <Router />
-  </ThemeProvider>
+    <ThemeProvider>
+      <Router />
+    </ThemeProvider>
   </BrowserRouter>,
 )
