@@ -1,609 +1,609 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "auth-service",
-            "type": "shell",
-            "command": "cd auth-service ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiCyan",
-                "id": "shield"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "black-list-server",
-            "type": "shell",
-            "command": "cd black-list-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiRed",
-                "id": "shield"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "fss-server",
-            "type": "shell",
-            "command": "cd fss-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "cac-server",
-            "type": "shell",
-            "command": "cd cac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "dnd-server",
-            "type": "shell",
-            "command": "cd dnd-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "log-server",
-            "type": "shell",
-            "command": "cd log-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "mac-server",
-            "type": "shell",
-            "command": "cd mac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "notification-server",
-            "type": "shell",
-            "command": "cd socket-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "unit-tag",
-            "type": "shell",
-            "command": "cd unit-symbols ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiBlue",
-                "id": "organization"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "files-server",
-            "type": "shell",
-            "command": "cd files-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiYellow",
-                "id": "file-pdf"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "layout-server",
-            "type": "shell",
-            "command": "cd mongo-server ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "spectrum-server",
-            "type": "shell",
-            "command": "cd spectrum-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "client",
-            "type": "shell",
-            "command": "cd frontend ; npm i ; npm start",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiGreen",
-                "id": "pie-chart"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "spectrum-synchronizer",
-            "type": "shell",
-            "command": "cd spectrum-synchronizer ; npm i ; npm run build ; npm run dev",
-            "problemMatcher": [],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                 "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "git",
-            "type": "shell",
-            "command": "git checkout main ; git pull ; exec bash",
-            "problemMatcher": [],
-            "icon": {
-                "color": "terminal.ansiWhite",
-                 "id": "git-branch"
-            },
-            "isBackground": true,
-            "presentation": {
-                "reveal": "always",
-                "focus": false
-            },
-            "options": {
-                "shell": {
-                    "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
-                    "args": ["-c"]
-                }
-            }
-        },
-        {
-            "label": "Run All servers",
-            "dependsOn":[
-                "auth-service",
-                "black-list-server",
-                "cac-server",
-                "mac-server",
-                "dnd-server",
-                "fss-server",
-                "spectrum-server",
-                "notification-server",
-                "files-server",
-                "log-server",
-                "layout-server",
-                "unit-tag",
-                "client",
-                "git"
-            ],
-            "dependsOrder": "parallel",
-            "problemMatcher":[],
-            "group": "build"
-        },
-        {
-            "label": "auth-service-nx",
-            "type": "shell",
-            "command": "npx nx dev auth-service",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiCyan",
-                "id": "shield"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "black-list-server-nx",
-            "type": "shell",
-            "command": "npx nx dev black-list-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiRed",
-                "id": "shield"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        
-        {
-            "label": "fss-server-nx",
-            "type": "shell",
-            "command": "npx nx dev fss-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "cac-server-nx",
-            "type": "shell",
-            "command": "npx nx dev cac-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "dnd-server-nx",
-            "type": "shell",
-            "command": "npx nx dev dnd-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "log-server-nx",
-            "type": "shell",
-            "command": "npx nx dev log-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "mac-server-nx",
-            "type": "shell",
-            "command": "npx nx dev mac-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "notification-server-nx",
-            "type": "shell",
-            "command": "npx nx dev notification-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "auth-service",
+      "type": "shell",
+      "command": "cd auth-service ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiCyan",
+        "id": "shield"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "black-list-server",
+      "type": "shell",
+      "command": "cd black-list-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiRed",
+        "id": "shield"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "fss-server",
+      "type": "shell",
+      "command": "cd fss-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "cac-server",
+      "type": "shell",
+      "command": "cd cac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "dnd-server",
+      "type": "shell",
+      "command": "cd dnd-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "log-server",
+      "type": "shell",
+      "command": "cd log-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "mac-server",
+      "type": "shell",
+      "command": "cd mac-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "notification-server",
+      "type": "shell",
+      "command": "cd socket-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "unit-tag",
+      "type": "shell",
+      "command": "cd unit-symbols ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiBlue",
+        "id": "organization"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "files-server",
+      "type": "shell",
+      "command": "cd files-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiYellow",
+        "id": "file-pdf"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "layout-server",
+      "type": "shell",
+      "command": "cd mongo-server ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "spectrum-server",
+      "type": "shell",
+      "command": "cd spectrum-server ; chcp 65001 ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "client",
+      "type": "shell",
+      "command": "cd frontend ; npm i ; npm start",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "pie-chart"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "spectrum-synchronizer",
+      "type": "shell",
+      "command": "cd spectrum-synchronizer ; npm i ; npm run build ; npm run dev",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "git",
+      "type": "shell",
+      "command": "git checkout main ; git pull ; exec bash",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiWhite",
+        "id": "git-branch"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "focus": false
+      },
+      "options": {
+        "shell": {
+          "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
+          "args": ["-c"]
+        }
+      }
+    },
+    {
+      "label": "Run All servers",
+      "dependsOn": [
+        "auth-service",
+        "black-list-server",
+        "cac-server",
+        "mac-server",
+        "dnd-server",
+        "fss-server",
+        "spectrum-server",
+        "notification-server",
+        "files-server",
+        "log-server",
+        "layout-server",
+        "unit-tag",
+        "client",
+        "git"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "auth-service-nx",
+      "type": "shell",
+      "command": "npx nx dev auth-service",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiCyan",
+        "id": "shield"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "black-list-server-nx",
+      "type": "shell",
+      "command": "npx nx dev black-list-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiRed",
+        "id": "shield"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
 
-                {
-            "label": "unit-tag-nx",
-            "type": "shell",
-            "command": "npx nx dev unit-tag",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiBlue",
-                "id": "organization"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "files-server-nx",
-            "type": "shell",
-            "command": "npx nx dev files-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiYellow",
-                "id": "file-pdf"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "layout-server-nx",
-            "type": "shell",
-            "command": "npx nx dev layout-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "spectrum-server-nx",
-            "type": "shell",
-            "command": "npx nx dev spectrum-server",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiMagenta",
-                "id": "server-environment"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "client-nx",
-            "type": "shell",
-            "command": "npx nx dev client",
-            "problemMatcher":[],
-            "icon": {
-                "color": "terminal.ansiGreen",
-                "id": "pie-chart"
-            },
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "powershell.exe",
-                    "args": ["-NoExit", "-Command"]
-                }
-            }
-        },
-        {
-            "label": "git-nx",
-            "type": "shell",
-            "command": "exec bash",
-            "problemMatcher": [],
-            "icon": {
-                "color": "terminal.ansiWhite",
-                 "id": "git-branch"
-            },
-            "isBackground": true,
-            "presentation": {
-                "reveal": "always",
-                "focus": false
-            },
-            "options": {
-                "shell": {
-                    "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
-                    "args": ["-c"]
-                }
-            }
-        },
-        {
-            "label": "Run All NX",
-            "dependsOn":[
-                "libs-watch-nx",
-                "auth-service-nx",
-                "black-list-server-nx",
-                "cac-server-nx",
-                "mac-server-nx",
-                "dnd-server-nx",
-                "fss-server-nx",
-                "spectrum-server-nx",
-                "notification-server-nx",
-                "files-server-nx",
-                "log-server-nx",
-                "layout-server-nx",
-                "unit-tag-nx",
-                "client-nx",
-                "git-nx"
-            ],
-            "dependsOrder": "parallel",
-            "problemMatcher":[],
-            "group": "build"
-        },
-        {
-    "label": "libs-watch-nx",
-    "type": "shell",
-    "command": "npx nx run-many -t dev --projects=tag:type:lib --parallel=5",
-    "problemMatcher": [],
-    "isBackground": true,
-    "options": {
+    {
+      "label": "fss-server-nx",
+      "type": "shell",
+      "command": "npx nx dev fss-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "cac-server-nx",
+      "type": "shell",
+      "command": "npx nx dev cac-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "dnd-server-nx",
+      "type": "shell",
+      "command": "npx nx dev dnd-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "log-server-nx",
+      "type": "shell",
+      "command": "npx nx dev log-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "mac-server-nx",
+      "type": "shell",
+      "command": "npx nx dev mac-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "notification-server-nx",
+      "type": "shell",
+      "command": "npx nx dev notification-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+
+    {
+      "label": "unit-tag-nx",
+      "type": "shell",
+      "command": "npx nx dev unit-tag",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiBlue",
+        "id": "organization"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "files-server-nx",
+      "type": "shell",
+      "command": "npx nx dev files-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiYellow",
+        "id": "file-pdf"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "layout-server-nx",
+      "type": "shell",
+      "command": "npx nx dev layout-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "spectrum-server-nx",
+      "type": "shell",
+      "command": "npx nx dev spectrum-server",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiMagenta",
+        "id": "server-environment"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "client-nx",
+      "type": "shell",
+      "command": "npx nx dev client",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "pie-chart"
+      },
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoExit", "-Command"]
+        }
+      }
+    },
+    {
+      "label": "git-nx",
+      "type": "shell",
+      "command": "exec bash",
+      "problemMatcher": [],
+      "icon": {
+        "color": "terminal.ansiWhite",
+        "id": "git-branch"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "focus": false
+      },
+      "options": {
+        "shell": {
+          "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
+          "args": ["-c"]
+        }
+      }
+    },
+    {
+      "label": "Run All NX",
+      "dependsOn": [
+        "libs-watch-nx",
+        "auth-service-nx",
+        "black-list-server-nx",
+        "cac-server-nx",
+        "mac-server-nx",
+        "dnd-server-nx",
+        "fss-server-nx",
+        "spectrum-server-nx",
+        "notification-server-nx",
+        "files-server-nx",
+        "log-server-nx",
+        "layout-server-nx",
+        "unit-tag-nx",
+        "client-nx",
+        "git-nx"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "libs-watch-nx",
+      "type": "shell",
+      "command": "npx nx run-many -t dev --projects=tag:type:lib --parallel=5",
+      "problemMatcher": [],
+      "isBackground": true,
+      "options": {
         "cwd": "${workspaceFolder}",
         "shell": { "executable": "powershell.exe", "args": ["-NoExit", "-Command"] }
+      }
+    },
+    {
+      "label": "warmup",
+      "type": "shell",
+      "command": "npm i ; npx nx run-many -t build --projects=tag:type:lib --parallel=8",
+      "problemMatcher": [],
+      "isBackground": false,
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-Command"] }
+      }
+    },
+    {
+      "label": "Run All Servers via NX",
+      "dependsOn": ["warmup", "Run All NX"],
+      "dependsOrder": "sequence",
+      "problemMatcher": [],
+      "group": "build"
     }
-},
-        {
-            "label": "warmup",
-            "type": "shell",
-            "command": "npm i ; npx nx run-many -t build --projects=tag:type:lib --parallel=8",
-            "problemMatcher": [],
-            "isBackground": false,
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-Command"] }
-            }
-        },
-        {
-            "label": "Run All Servers via NX",
-            "dependsOn":["warmup", "Run All NX"],
-            "dependsOrder": "sequence",
-            "problemMatcher": [],
-            "group": "build"
-        }
-    ]
+  ]
 }

@@ -1,0 +1,15 @@
+{
+  "name": "DB",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/DB/src",
+  "projectType": "library",
+  "tags": ["type:lib"],
+  "targets": {
+    "build": {},
+    "dev": {
+      "options": {
+        "command": "tsc --w"
+      }
+    }
+  }
+}

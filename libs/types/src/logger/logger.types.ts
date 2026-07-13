@@ -7,4 +7,7 @@ export type TagsLoggerType =
   | 'VALIDATION ERROR'
   | 'SERVER ERROR'
   | 'TOKEN'
-  | 'SQL_INJECTION';
+  | 'SQL_INJECTION'
+  | 'CONNECT TO PG'
+  | 'INSTANCE NOT FOUND'
+  | 'ROUTER';
