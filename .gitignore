@@ -36,6 +36,9 @@ ARGOCD_SECRETS.yaml
 
 # Lock
 *lock.json
+!/package-lock.json
 
 # Test
 junit.xml
+vite.config.*.timestamp*
+vitest.config.*.timestamp*

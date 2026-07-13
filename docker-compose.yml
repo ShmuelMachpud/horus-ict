@@ -1,0 +1,183 @@
+version: '2'
+
+services:
+  frontend:
+    image: 'frontend'
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    env_file:
+      - ./frontend/.env
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/usr/src/app/:z
+      - /frontend_node_modules:/usr/src/app/node_modules
+  auth-service:
+    image: 'auth-service'
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    env_file:
+      - ./auth-service/.env
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./auth-service:/usr/src/app/:z
+      - /auth-service_node_modules:/usr/src/app/node_modules
+  black-list-server:
+    image: 'black-list-server'
+    build:
+      context: ./black-list-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./black-list-server/.env
+    ports:
+      - '11000:11000'
+    volumes:
+      - ./black-list-server:/usr/src/app/:z
+      - /black-list-server_node_modules:/usr/src/app/node_modules
+  cac-server:
+    image: 'cac-server'
+    build:
+      context: ./cac-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./cac-server/.env
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./cac-server:/usr/src/app/:z
+      - /cac-server_node_modules:/usr/src/app/node_modules
+  spectrum-server:
+    image: 'spectrum-server'
+    build:
+      context: ./spectrum-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./spectrum-server/.env
+    ports:
+      - '13000:13000'
+    volumes:
+      - ./spectrum-server:/usr/src/app/:z
+      - /spectrum-server_node_modules:/usr/src/app/node_modules
+  mac-server:
+    image: 'mac-server'
+    build:
+      context: ./mac-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./mac-server/.env
+    ports:
+      - '9003:9003'
+    volumes:
+      - ./mac-server:/usr/src/app/:z
+      - /mac-server_node_modules:/usr/src/app/node_modules
+  force-snapshot-server:
+    image: 'force-snapshot-server'
+    build:
+      context: ./force-snapshot-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./force-snapshot-server/.env
+    ports:
+      - '9001:9001'
+    volumes:
+      - ./force-snapshot-server:/usr/src/app/:z
+      - /force-snapshot-server_node_modules:/usr/src/app/node_modules
+  files-server:
+    image: 'files-server'
+    build:
+      context: ./files-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./files-server/.env
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./files-server:/usr/src/app/:z
+      - /files-server_node_modules:/usr/src/app/node_modules
+  log-server:
+    image: 'log-server'
+    build:
+      context: ./log-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./log-server/.env
+    ports:
+      - '4321:4321'
+    volumes:
+      - ./log-server:/usr/src/app/:z
+      - /log-server_node_modules:/usr/src/app/node_modules
+  mongo-server:
+    image: 'mongo-server'
+    build:
+      context: ./mongo-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./mongo-server/.env
+    ports:
+      - '2026:2026'
+    volumes:
+      - ./mongo-server:/usr/src/app/:z
+      - /mongo-server_node_modules:/usr/src/app/node_modules
+  unit-symbols:
+    image: 'unit-symbols'
+    build:
+      context: ./unit-symbols
+      dockerfile: Dockerfile
+    env_file:
+      - ./unit-symbols/.env
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./unit-symbols:/usr/src/app/:z
+      - /unit-symbols_node_modules:/usr/src/app/node_modules
+  # loki:
+  #   image: '......loki'
+  #   container_name: loki
+  #   ports:
+  #     - '3100:3100'
+  #   command: -config.file=/etc/loki/config.yaml
+  #   volumes:
+  #     - ./loki-config.yaml:/etc/loki/config.yaml:ro
+  # promtail:
+  #   image: '......promtail'
+  #   container_name: promtail
+  #   command: -config.file/etc/promtaile/config.yaml
+  #   volumes:
+  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - ./promtail.yaml:/etc/promtail/config.yaml:ro
+  gateway:
+    image: 'gateway'
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+    env_file:
+      - ./gateway/.env
+    volumes:
+      - ./gateway:/usr/src/app/:z
+    depends_on:
+      - frontend
+      - auth-service
+      - cac-server
+      - mac-server
+      - force-snapshot-server
+      - black-list-server
+
+volumes:
+  frontend_node_modules:
+  auth-service_node_modules:
+  cac-server_node_modules:
+  spectrum-server_node_modules:
+  mac-server_node_modules:
+  force-snapshot-server_node_modules:
+  lack-list-server_node_modules:
+  log-server_node_modules:
+  files-server_node_modules:
+  mongo-server_node_modules:
+  unit-symbols_node_modules:

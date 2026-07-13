@@ -13,14 +13,11 @@
     "noImplicitReturns": true,
     "allowUnreachableCode": false,
     "incremental": true,
-    // "noImplicitAny": false,
-    // "ignoreDeprecations": "6.0",
-    // "baseUrl": ".",
     "paths": {
-      "@zayad/types": ["./libs/types/dist/index"],
-      "@zayad/utils": ["./libs/utils/dist/index"],
       "@zayad/helpers": ["./libs/helpers/dist/index"],
-      "@zayad/middlewares": ["./libs/middlewares/dist/index"]
+      "@zayad/middlewares": ["./libs/middlewares/dist/index"],
+      "@zayad/types": ["./libs/types/dist/index"],
+      "@zayad/utils": ["./libs/utils/dist/index"]
     }
   }
 }

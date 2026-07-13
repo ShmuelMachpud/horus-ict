@@ -1,7 +1,7 @@
 {
   "name": "unit-symbols",
   "version": "1.0.0",
-  "description": "express server",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && ts-node-dev src/index.ts",

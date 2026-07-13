@@ -1,0 +1,8 @@
+stages:
+  - test
+  - build
+  - deploy
+  - deploy-check
+  - cleanup
+
+in
