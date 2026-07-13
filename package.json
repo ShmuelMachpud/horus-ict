@@ -6,11 +6,10 @@
     "libs/*"
   ],
   "scripts": {
-    "build": "nx run-many --target=build --all --parallel=8",
-    "build:libs": "nx run-many --target=build --projects=tag:type:lib --parallel=8",
-    "build:apps": "nx run-many --target=build --projects=tag:type:app --parallel=8",
-    "dev": "nx run-many --target=dev --all --parallel=20 --output-style=stream",
-    "predev": "npm i"
+    "build": "nx run-many --target=build --all --parallel=10",
+    "build:libs": "nx run-many --target=build --projects=tag:type:lib --parallel=10",
+    "build:apps": "nx run-many --target=build --projects=tag:type:app --parallel=10",
+    "dev": "nx run-many --target=dev --all --parallel=20 --output-style=stream"
   },
   "license": "ISC",
   "dependencies": {
