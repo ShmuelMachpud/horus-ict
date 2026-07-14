@@ -1,6 +1,14 @@
 import { Pool, PoolConfig, QueryResultRow } from 'pg';
-import type { ColumnRecord, ColumnRef, ColumnRefs } from '../types/orm.types';
-// import type { ColumnRecord, ColumnRef, ColumnRefs, FindOptions, InferRow } from '../types/orm.types';
+import {
+  ColumnRecord,
+  ColumnRef,
+  ColumnRefs,
+  FindOptions,
+  InferRow,
+  Prettify,
+  SqlValue,
+  WhereOptions,
+} from '../types/orm.types';
 import { Column } from './Column';
 import { CustomError } from '@zayad/helpers';
 
@@ -25,11 +33,10 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
     for (const schema of ORM.#schemas) await schema.#sync();
   }
 
-  // להעביר ל #query
-  static async query<T, R extends QueryResultRow = T & QueryResultRow>(query: string, values?: Array<T[keyof T]>) {
+  static async #query<T extends QueryResultRow>(query: string, values?: SqlValue[]) {
     try {
       if (!ORM.#pool) throw new CustomError('DB not connected', 'CONNECT TO PG', 500);
-      const { rows } = await ORM.#pool.query<R>(query, values);
+      const { rows } = await ORM.#pool.query<T>(query, values);
       return rows;
     } catch (error) {
       return Promise.reject(error);
@@ -73,26 +80,45 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
     return `CREATE TABLE IF NOT EXISTS ${this.#tableName} (\n${colDefs}\n)`;
   }
 
-  // async findAll(): Promise<InferRow<TCols>[]> {
-  //   return this.#select<InferRow<TCols>>('*');
-  // }
+  async findAll() {
+    return this.#select<InferRow<TCols>>('*');
+  }
 
-  // async find<TKeys extends keyof TCols & string>(
-  //   options: FindOptions<TCols, TKeys>
-  // ): Promise<Pick<InferRow<TCols>, TKeys>[]> {
-  //   const cols = options.select.map((c) => `"${c}"`).join(', ');
-  //   return this.#select<Pick<InferRow<TCols>, TKeys>>(cols);
-  // }
+  async find<TKeys extends keyof TCols & string>(options: FindOptions<TCols, TKeys>) {
+    const { select, where } = options;
+    const cols = select ? select.map((c) => `"${c}"`).join(', ') : '*';
+    if (!where) return this.#select<Prettify<InferRow<Pick<TCols, TKeys>>>>(cols);
+    const { sql, values } = this.#buildWhere(where);
+    return this.#select<Prettify<InferRow<Pick<TCols, TKeys>>>>(cols, sql, values);
+  }
 
-  // async #select<TRow>(cols: string): Promise<TRow[]> {
-  //   const result = await ORM.query<TRow>(`SELECT ${cols} FROM ${this.#tableName}`);
-  //   return result ?? [];
-  // }
+  #buildWhere(where: WhereOptions<TCols>) {
+    const values: SqlValue[] = [];
+    const conditions: string[] = [];
+
+    Object.entries(where).forEach(([columnName, value]) => {
+      if (value === undefined) return;
+      if (value === null) return conditions.push(`"${columnName}" IS NULL`);
+      values.push(value);
+      return conditions.push(`"${columnName}" = $${values.length}`);
+    });
+
+    return {
+      sql: conditions.length ? ` WHERE ${conditions.join(' AND ')}` : undefined,
+      values: conditions.length && values.length ? values : undefined,
+    };
+  }
+
+  async #select<TRow extends QueryResultRow>(cols: string, whereSql = '', values?: SqlValue[]): Promise<TRow[]> {
+    const sql = `SELECT ${cols} FROM ${this.#tableName}${whereSql}`;
+    if (!values) return ORM.#query<TRow>(sql);
+    return ORM.#query<TRow>(sql, values);
+  }
 
   async #sync(): Promise<void> {
     const table = this.#tableName.split('.');
-    if (table.length === 2) await ORM.query(`CREATE SCHEMA IF NOT EXISTS ${table[0]}`);
-    await ORM.query(this.#toSQL());
+    if (table.length === 2) await ORM.#query(`CREATE SCHEMA IF NOT EXISTS ${table[0]}`);
+    await ORM.#query(this.#toSQL());
     global.log.success({ tag: 'ORM' }, `Synced table "${this.#tableName}"`);
   }
 }

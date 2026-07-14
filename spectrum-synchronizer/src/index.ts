@@ -1,11 +1,10 @@
 import './helpers/pino';
-import { config } from './helpers/postgres/config-client';
+import { checkPostgresConnection } from './helpers/postgres/connectToPostgres';
 import { createTables } from './helpers/postgres/create-tables';
 import { syncTables } from './helpers/postgres/sync-tables';
-import { ORM } from './orm/models/ORM';
 import { handleError } from './utils/handleError';
 
-ORM.connect(config)
+checkPostgresConnection()
   .then(() => createTables())
   .then(() => syncTables())
   .catch((error) => handleError(error, 'Failed to run server:', 'INITIAL SERVER'));

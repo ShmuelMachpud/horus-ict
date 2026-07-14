@@ -1,6 +1,7 @@
 import { ORM } from '../../orm/models/ORM';
+import { AUTH_TABLES } from '../models/tables.models';
 
-export const UNIT_TREE_SCHEMA = ORM.createSchema('spectrum.units', {
+export const UNIT_TREE_SCHEMA = ORM.createSchema(AUTH_TABLES.UNIT_TREE, {
   id: ORM.varchar(55).primaryKey(),
   unit_id: ORM.varchar(55).unique(),
   zayad_id: ORM.integer(),
