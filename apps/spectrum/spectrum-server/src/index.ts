@@ -4,6 +4,7 @@ import { corsMiddleware, handleServerError, helmetMiddleware, pinoMiddleware, sq
 import { SPECTRUM_SERVER_PORT as PORT } from '@zayad/utils';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import router from './router';
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(express.static('./public'));
 app.use(cookieParser());
 // app.use(metrics);
-// app.use(router);
+app.use(router);
 
 checkPostgresConnection()
   .then(() => app.listen(PORT, () => global.log.info({ tag: `INITIAL SERVER` }, `server run on port ${PORT}`)))

@@ -17,8 +17,7 @@ export type ColumnRecord = Record<string, Column<SqlValue>>;
 export interface ColumnRef<T extends SqlValue = SqlValue> {
   table: string;
   column: string;
-  // phantom type
-  __type?: T;
+  __type?: T; // phantom type
 }
 
 export type ColType<C> = C extends Column<infer T> ? T : never;
@@ -35,6 +34,11 @@ export type InferRow<TCols extends ColumnRecord> = {
   [K in keyof TCols]: TCols[K] extends Column<infer T> ? T : never;
 };
 
-export type FindOptions<TCols extends ColumnRecord, TKeys extends keyof TCols & string = keyof TCols & string> = {
-  select: TKeys[];
+export type WhereOptions<TCols extends ColumnRecord> = Partial<InferRow<TCols>>;
+
+export type FindOptions<TCols extends ColumnRecord, TKeys extends keyof TCols> = {
+  select?: TKeys[];
+  where?: WhereOptions<TCols>;
 };
+
+export type Prettify<T> = { [K in keyof T]: T[K] } & {};

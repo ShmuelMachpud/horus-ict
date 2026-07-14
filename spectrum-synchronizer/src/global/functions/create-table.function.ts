@@ -1,9 +1,9 @@
-import { ORM } from '../../orm/models/ORM';
+import { queryToPostgres } from '../../helpers/postgres/queryToPostgres';
 import { handleError } from '../../utils/handleError';
 
 export const createTableFunction = async (table_name: string, query: string) => {
   try {
-    await ORM.query(query);
+    await queryToPostgres(query);
     global.log.success({ tag: 'CREATE TABLE' }, `Successfully create "${table_name}" table`);
   } catch (error) {
     handleError(error, `failed to create table ${table_name}`, 'CREATE TABLES');

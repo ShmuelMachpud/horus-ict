@@ -1,5 +1,13 @@
-import { InferTable } from '../../orm/types/orm.types';
-import { CONFLICT_SCHEMA } from '../queries/createTable.queries';
+// import { UUID } from 'crypto';
 
-type ConflictInterface = InferTable<typeof CONFLICT_SCHEMA>;
-export interface CreateConflictInterface extends Omit<ConflictInterface, 'id' | 'is_deleted'> {}
+// export interface ConflictInterface {
+//   id: UUID;
+//   created_at: number;
+//   updated_at: number;
+//   created_by: string | null;
+//   updated_by: string | null;
+//   is_deleted: boolean;
+//   unit_id: string;
+//   conflicts: string;
+//   effect: string;
+// }
