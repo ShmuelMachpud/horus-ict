@@ -1,5 +1,5 @@
 import { ORM } from '../../orm/models/ORM';
-import { AUTH_TABLES } from '../models/tables.models';
+import { AUTH_TABLES } from '../../models/tables.models';
 
 export const UNIT_TREE_SCHEMA = ORM.createSchema(AUTH_TABLES.UNIT_TREE, {
   id: ORM.varchar(55).primaryKey(),
@@ -8,7 +8,7 @@ export const UNIT_TREE_SCHEMA = ORM.createSchema(AUTH_TABLES.UNIT_TREE, {
   name: ORM.varchar(55).notNull(),
   type_id: ORM.varchar(55).notNull(), //enum
   type_name: ORM.varchar(55).notNull(), //enum
-  is_deleted: ORM.boolean().default('false'),
+  is_deleted: ORM.boolean().default('FALSE'),
   updated_at: ORM.bigint().notNull(),
   eged: ORM.varchar(55),
   brigade: ORM.varchar(55),

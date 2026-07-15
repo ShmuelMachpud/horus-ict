@@ -24,7 +24,11 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
   }
 
   static async connect(config: PoolConfig): Promise<void> {
-    if (!ORM.#pool) ORM.#pool = new Pool(config);
+    if (!ORM.#pool) {
+      ORM.#pool = new Pool(config);
+      ORM.#pool.on('error', (err) => global.log.error({ tag: 'PG POOL' }, `Idle client error: ${err.message}`));
+    }
+
     const pool = ORM.#pool;
     if (!pool) throw new CustomError('DB not connected', 'CONNECT TO PG', 500);
     const client = await pool.connect();
@@ -34,13 +38,9 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
   }
 
   static async #query<T extends QueryResultRow>(query: string, values?: SqlValue[]) {
-    try {
-      if (!ORM.#pool) throw new CustomError('DB not connected', 'CONNECT TO PG', 500);
-      const { rows } = await ORM.#pool.query<T>(query, values);
-      return rows;
-    } catch (error) {
-      return Promise.reject(error);
-    }
+    if (!ORM.#pool) throw new CustomError('DB not connected', 'CONNECT TO PG', 500);
+    const { rows } = await ORM.#pool.query<T>(query, values);
+    return rows;
   }
 
   static uuid() {
