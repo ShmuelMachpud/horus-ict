@@ -42,3 +42,63 @@ export type FindOptions<TCols extends ColumnRecord, TKeys extends keyof TCols> =
 };
 
 export type Prettify<T> = { [K in keyof T]: T[K] } & {};
+
+// migration types
+export type MigrationMode = 'safe' | 'force';
+
+export interface MigrationOptions {
+  migrationMode?: MigrationMode;
+}
+
+export interface DbColumn {
+  name: string;
+  sqlType: string;
+  notNull: boolean;
+  primaryKey: boolean;
+  unique: boolean;
+  defaultValue?: string;
+  reference?: { table: string; column: string };
+}
+
+export type DbTable = Record<string, DbColumn>;
+
+export interface AlterAction {
+  description: string;
+  sql: string;
+}
+
+export interface MigrationWarning {
+  description: string;
+  manualSql: string;
+}
+
+export interface TableDiff {
+  safe: AlterAction[];
+  unSafe: MigrationWarning[];
+}
+
+export interface ColumnRow {
+  column_name: string;
+  data_type: string;
+  character_maximum_length: number | null;
+  is_nullable: 'YES' | 'NO';
+  column_default: string | null;
+}
+
+export interface ConstraintRow {
+  constraint_type: 'PRIMARY KEY' | 'UNIQUE' | 'FOREIGN KEY';
+  column_name: string;
+  foreign_schema: string | null;
+  foreign_table: string | null;
+  foreign_column: string | null;
+}
+
+interface DiffContext {
+  tableName: string;
+  table: string;
+  columnName: string;
+  column: ColumnConfig;
+  dbColumn: DbColumn;
+}
+
+export type ColumnCheck = (ctx: DiffContext) => TableDiff;

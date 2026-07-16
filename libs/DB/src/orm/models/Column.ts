@@ -13,6 +13,9 @@ export class Column<T extends SqlValue> {
     };
   }
 
+  get config(): Readonly<ColumnConfig> {
+    return this.#config;
+  }
   notNull(): Column<NonNullable<T>> {
     return new Column<NonNullable<T>>(this.#config.sqlType, {
       ...this.#config,

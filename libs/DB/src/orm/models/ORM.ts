@@ -1,16 +1,24 @@
 import { Pool, PoolConfig, QueryResultRow } from 'pg';
 import {
+  AlterAction,
   ColumnRecord,
   ColumnRef,
   ColumnRefs,
+  ColumnRow,
+  ConstraintRow,
+  DbTable,
   FindOptions,
   InferRow,
+  MigrationWarning,
   Prettify,
   SqlValue,
+  TableDiff,
   WhereOptions,
 } from '../types/orm.types';
 import { Column } from './Column';
 import { CustomError } from '@zayad/helpers';
+import { checkNewColumn, COLUMN_CHECKS, normalizeDefault, normalizeType } from '../helpers/migration.functions';
+import { COLUMNS_SQL, CONSTRAINTS_SQL } from '../helpers/migration.sql';
 
 export class ORM<TName extends string, TCols extends ColumnRecord> {
   static #pool: Pool | undefined;
@@ -120,5 +128,79 @@ export class ORM<TName extends string, TCols extends ColumnRecord> {
     if (table.length === 2) await ORM.#query(`CREATE SCHEMA IF NOT EXISTS ${table[0]}`);
     await ORM.#query(this.#toSQL());
     global.log.success({ tag: 'ORM' }, `Synced table "${this.#tableName}"`);
+  }
+
+  #tableParts(): { schema: string; table: string } {
+    const parts = this.#tableName.split('.');
+    if (parts.length === 2) return { schema: parts[0], table: parts[1] };
+    return { schema: 'public', table: parts[0] };
+  }
+
+  async #introspect(): Promise<DbTable> {
+    const { schema, table } = this.#tableParts();
+    const columns = await ORM.#query<ColumnRow>(COLUMNS_SQL, [schema, table]);
+    const constraints = await ORM.#query<ConstraintRow>(CONSTRAINTS_SQL, [schema, table]);
+
+    const dbTable: DbTable = {};
+
+    for (const col of columns) {
+      dbTable[col.column_name] = {
+        name: col.column_name,
+        sqlType: normalizeType(col.data_type, col.character_maximum_length),
+        notNull: col.is_nullable === 'NO',
+        primaryKey: false,
+        unique: false,
+        defaultValue: col.column_default ? normalizeDefault(col.column_default) : undefined,
+      };
+    }
+
+    for (const con of constraints) {
+      const dbCol = dbTable[con.column_name];
+      if (!dbCol) continue;
+      if (con.constraint_type === 'PRIMARY KEY') dbCol.primaryKey = true;
+      if (con.constraint_type === 'UNIQUE') dbCol.unique = true;
+      if (con.constraint_type === 'FOREIGN KEY' && con.foreign_table && con.foreign_column)
+        dbCol.reference = {
+          table: `${con.foreign_schema}.${con.foreign_table}`,
+          column: con.foreign_column,
+        };
+    }
+
+    return dbTable;
+  }
+
+  #diff(dbTable: DbTable): TableDiff {
+    const safe: AlterAction[] = [];
+    const unSafe: MigrationWarning[] = [];
+    const tableName = this.#tableName;
+    const { table } = this.#tableParts();
+
+    for (const [columnName, column] of Object.entries(this.#columns)) {
+      const dbColumn = dbTable[columnName];
+
+      // 1. עמודה חדשה בקוד
+      if (!dbColumn) {
+        const newColumnDiff = checkNewColumn(column, tableName, columnName);
+        safe.push(...newColumnDiff.safe);
+        unSafe.push(...newColumnDiff.unSafe);
+        continue;
+      }
+
+      COLUMN_CHECKS.forEach((check) => {
+        const result = check({ tableName, table, columnName, column: column.config, dbColumn });
+        safe.push(...result.safe);
+        unSafe.push(...result.unSafe);
+      });
+    }
+
+    // 8. עמודות שקיימות ב-DB אבל לא בקוד
+    for (const name of Object.keys(dbTable))
+      if (!(name in this.#columns))
+        unSafe.push({
+          description: `column "${name}" exists in DB but not in schema (data loss if dropped)`,
+          manualSql: `ALTER TABLE ${tableName} DROP COLUMN "${name}";`,
+        });
+
+    return { safe, unSafe };
   }
 }
