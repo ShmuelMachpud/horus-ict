@@ -51,7 +51,6 @@ export interface MigrationOptions {
 }
 
 export interface DbColumn {
-  name: string;
   sqlType: string;
   notNull: boolean;
   primaryKey: boolean;
@@ -62,19 +61,19 @@ export interface DbColumn {
 
 export type DbTable = Record<string, DbColumn>;
 
-export interface AlterAction {
+export interface SafeAction {
   description: string;
   sql: string;
 }
 
-export interface MigrationWarning {
+export interface UnsafeAction {
   description: string;
-  manualSql: string;
+  manualSql?: string;
 }
 
-export interface TableDiff {
-  safe: AlterAction[];
-  unSafe: MigrationWarning[];
+export interface CompareResult {
+  safe: SafeAction[];
+  unsafe: UnsafeAction[];
 }
 
 export interface ColumnRow {
@@ -93,7 +92,7 @@ export interface ConstraintRow {
   foreign_column: string | null;
 }
 
-interface DiffContext {
+interface CompareContext {
   tableName: string;
   table: string;
   columnName: string;
@@ -101,4 +100,4 @@ interface DiffContext {
   dbColumn: DbColumn;
 }
 
-export type ColumnCheck = (ctx: DiffContext) => TableDiff;
+export type ColumnCheck = (ctx: CompareContext) => CompareResult;

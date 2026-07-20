@@ -1,25 +1,27 @@
 import { Column } from '../models/Column';
-import { AlterAction, ColumnCheck, MigrationWarning, SqlValue } from '../types/orm.types';
+import { SafeAction, ColumnCheck, UnsafeAction, SqlValue } from '../types/orm.types';
 
-const PG_TYPE_MAP: Record<string, string> = {
-  uuid: 'UUID',
-  integer: 'INTEGER',
-  bigint: 'BIGINT',
-  boolean: 'BOOLEAN',
+const REGEX_DEFAULT = /::[\w\s"]+$/;
+
+export const parseTableName = (tableName: string): { schema: string; table: string } => {
+  const [first, second] = tableName.split('.');
+  return second ? { schema: first, table: second } : { schema: 'public', table: first };
 };
 
+const fullTableName = (tableName: string): string => {
+  const { schema, table } = parseTableName(tableName);
+  return `${schema}.${table}`;
+};
 export const normalizeType = (dataType: string, maxLength: number | null): string => {
   if (dataType === 'character varying') return maxLength ? `VARCHAR(${maxLength})` : 'VARCHAR';
-  return PG_TYPE_MAP[dataType] ?? dataType.toUpperCase();
+  return dataType.toUpperCase();
 };
 
-export const normalizeDefault = (columnDefault: string): string => columnDefault.replace(/::[\w\s"]+$/, '');
-
-export const qualify = (table: string): string => (table.includes('.') ? table : `public.${table}`);
+export const normalizeDefault = (columnDefault: string): string => columnDefault.replace(REGEX_DEFAULT, '');
 
 export const checkNewColumn = (column: Column<SqlValue>, tableName: string, columnName: string) => {
-  const safe: AlterAction[] = [];
-  const unSafe: MigrationWarning[] = [];
+  const safe: SafeAction[] = [];
+  const unsafe: UnsafeAction[] = [];
   if (column.config.defaultValue || !column.config.notNull)
     safe.push({
       description: `add column "${columnName}"`,
@@ -30,26 +32,26 @@ export const checkNewColumn = (column: Column<SqlValue>, tableName: string, colu
       description: `add column "${columnName}" as nullable (NOT NULL without default)`,
       sql: `ALTER TABLE ${tableName} ADD COLUMN "${columnName}" ${column.config.sqlType}`,
     });
-    unSafe.push({
+    unsafe.push({
       description: `column "${columnName}" is NOT NULL in schema — backfill values first, then enforce`,
       manualSql: `ALTER TABLE ${tableName} ALTER COLUMN "${columnName}" SET NOT NULL;`,
     });
   }
-  return { safe, unSafe };
+  return { safe, unsafe };
 };
 
 const checkType: ColumnCheck = ({ tableName, columnName, column, dbColumn }) => {
-  const unSafe: MigrationWarning[] = [];
+  const unsafe: UnsafeAction[] = [];
   if (column.sqlType !== dbColumn.sqlType)
-    unSafe.push({
+    unsafe.push({
       description: `column "${columnName}": schema says ${column.sqlType}, DB has ${dbColumn.sqlType}`,
       manualSql: `ALTER TABLE ${tableName} ALTER COLUMN "${columnName}" TYPE ${column.sqlType};`,
     });
-  return { safe: [], unSafe };
+  return { safe: [], unsafe };
 };
 
 const checkDefault: ColumnCheck = ({ tableName, columnName, column, dbColumn }) => {
-  const safe: AlterAction[] = [];
+  const safe: SafeAction[] = [];
   if (column.defaultValue?.toLowerCase() !== dbColumn.defaultValue?.toLowerCase())
     safe.push({
       description: `${column.defaultValue ? 'set' : 'drop'} default for "${columnName}"`,
@@ -57,15 +59,15 @@ const checkDefault: ColumnCheck = ({ tableName, columnName, column, dbColumn }) 
         ? `ALTER TABLE ${tableName} ALTER COLUMN "${columnName}" SET DEFAULT ${column.defaultValue}`
         : `ALTER TABLE ${tableName} ALTER COLUMN "${columnName}" DROP DEFAULT`,
     });
-  return { safe, unSafe: [] };
+  return { safe, unsafe: [] };
 };
 
 const checkNotNull: ColumnCheck = ({ tableName, columnName, column, dbColumn }) => {
-  const safe: AlterAction[] = [];
-  const unSafe: MigrationWarning[] = [];
+  const safe: SafeAction[] = [];
+  const unsafe: UnsafeAction[] = [];
   if (column.notNull !== dbColumn.notNull) {
     if (column.notNull)
-      unSafe.push({
+      unsafe.push({
         description: `column "${columnName}" should be NOT NULL but DB allows nulls`,
         manualSql: `ALTER TABLE ${tableName} ALTER COLUMN "${columnName}" SET NOT NULL;`,
       });
@@ -75,12 +77,12 @@ const checkNotNull: ColumnCheck = ({ tableName, columnName, column, dbColumn }) 
         sql: `ALTER TABLE ${tableName} ALTER COLUMN "${columnName}" DROP NOT NULL`,
       });
   }
-  return { safe, unSafe };
+  return { safe, unsafe };
 };
 
 const checkUnique: ColumnCheck = ({ tableName, table, columnName, column, dbColumn }) => {
-  const safe: AlterAction[] = [];
-  const unSafe: MigrationWarning[] = [];
+  const safe: SafeAction[] = [];
+  const unsafe: UnsafeAction[] = [];
 
   if (!column.primaryKey && column.unique !== dbColumn.unique) {
     const constraintName = `${table}_${columnName}_key`;
@@ -90,43 +92,44 @@ const checkUnique: ColumnCheck = ({ tableName, table, columnName, column, dbColu
         sql: `ALTER TABLE ${tableName} ADD CONSTRAINT "${constraintName}" UNIQUE ("${columnName}")`,
       });
     else
-      unSafe.push({
+      unsafe.push({
         description: `column "${columnName}" is UNIQUE in DB but not in schema`,
         manualSql: `ALTER TABLE ${tableName} DROP CONSTRAINT "${constraintName}";`,
       });
   }
 
-  return { safe, unSafe };
+  return { safe, unsafe };
 };
 
-const checkPrimaryKey: ColumnCheck = ({ tableName, columnName, column, dbColumn }) => {
-  const unSafe: MigrationWarning[] = [];
+const checkPrimaryKey: ColumnCheck = ({ columnName, column, dbColumn }) => {
+  const unsafe: UnsafeAction[] = [];
   if (column.primaryKey !== dbColumn.primaryKey)
-    unSafe.push({
+    unsafe.push({
       description: `primary key mismatch on "${columnName}" — changing a PK is a manual operation`,
-      manualSql: `-- review manually: ALTER TABLE ${tableName} ... PRIMARY KEY`,
     });
 
-  return { safe: [], unSafe };
+  return { safe: [], unsafe };
 };
 
 const checkReference: ColumnCheck = ({ tableName, table, columnName, column, dbColumn }) => {
-  const unSafe: MigrationWarning[] = [];
+  const unsafe: UnsafeAction[] = [];
   const columnRef = column.reference;
   const dbRef = dbColumn.reference;
   const refChanged =
     (columnRef && !dbRef) ||
     (!columnRef && dbRef) ||
-    (columnRef && dbRef && (qualify(columnRef.table) !== qualify(dbRef.table) || columnRef.column !== dbRef.column));
+    (columnRef &&
+      dbRef &&
+      (fullTableName(columnRef.table) !== fullTableName(dbRef.table) || columnRef.column !== dbRef.column));
   if (refChanged)
-    unSafe.push({
+    unsafe.push({
       description: `foreign key mismatch on "${columnName}"`,
       manualSql: columnRef
-        ? `ALTER TABLE ${tableName} ADD CONSTRAINT "${table}_${columnName}_fkey" FOREIGN KEY ("${columnName}") REFERENCES ${qualify(columnRef.table)}("${columnRef.column}");`
+        ? `ALTER TABLE ${tableName} ADD CONSTRAINT "${table}_${columnName}_fkey" FOREIGN KEY ("${columnName}") REFERENCES ${fullTableName(columnRef.table)}("${columnRef.column}");`
         : `ALTER TABLE ${tableName} DROP CONSTRAINT "${table}_${columnName}_fkey";`,
     });
 
-  return { safe: [], unSafe };
+  return { safe: [], unsafe };
 };
 
 export const COLUMN_CHECKS: ColumnCheck[] = [
